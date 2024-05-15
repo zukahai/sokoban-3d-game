@@ -1653,9 +1653,9 @@ var tutoNumber = !1,
     });
 var tuto = {
     1: [
-        //   [{ x: 2, y: 2, z: -8 }, "Đây là bạn. Di chuyển bằng các phím mũi tên", 4e3],
-        //   [{ x: 14, y: 2, z: -8 }, "Cẩn thận với các lỗ", 3e3],
-        //   [{ x: 22, y: 2, z: -8 }, "Đây là mục tiêu của bạn, lấy quả cầu để thắng", 4e3],
+          [{ x: 2, y: 2, z: -8 }, "Đây là bạn. Di chuyển bằng các phím mũi tên", 4e3],
+          [{ x: 14, y: 2, z: -8 }, "Cẩn thận với các lỗ", 3e3],
+          [{ x: 22, y: 2, z: -8 }, "Đây là mục tiêu của bạn, lấy quả cầu để thắng", 4e3],
     ],
     2: [[{ x: 12, y: 2, z: 0 }, "Bạn có thể đẩy các thùng", 3e3]],
     5: [
