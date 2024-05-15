@@ -167,38 +167,7 @@ function sy() {
             return c;
         });
 }
-function drawText(e, t, a, r) {
-    ctx.font = 30 + 'px MyCustomFont';
-    var o = ["#000", "#FFF"];
-    r /= 2;
-    for (var i = 0; i < o.length; i++) {
-        (ctx.fillStyle = o[i]),
-            0 != i ? (e -= 2) : 0,
-            0 != i ? (t -= 2) : 0,
-            (ctx.lineWidth = 0.5),
-            (ctx.strokeStyle = "#000");
-        for (var n = e, l = t, s = 0; s < a.length; s++) {
-            var g = 0;
-            if ("&" != a[s]) {
-                for (y = 0; 7 > y; y++)
-                    for (x = 0; 5 > x; x++)
-                        (decalY = waitingKeyStart
-                            ? 5 * Math.cos((frame + y + x + t) / 32)
-                            : 0),
-                            " " != a[s] &&
-                            ("0" != font[a[s]][g] &&
-                                ctx.fillRect(
-                                    n + 2 * x * r,
-                                    l + 2 * y * r + decalY,
-                                    3 * r,
-                                    3 * r
-                                ),
-                                g++);
-                n += 12 * r;
-            } else (n = e), (l += 2 * r * 12);
-        }
-    }
-}
+
 function getShader(e, t) {
     for (var a = document.getElementById(t), r = "", o = a.firstChild; o;)
         3 == o.nodeType && (r += o.textContent), (o = o.nextSibling);
