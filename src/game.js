@@ -519,7 +519,7 @@ function drawHUDHome() {
     ctx.fillStyle = "#000000";
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
-    ctx.fillStyle = "#ffffff";
+        ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.fillText("SOKOBAN 3D", canvasHUD.width / 2, canvasHUD.height / 2 - 100);
     ctx.font = canvasHUD.width / 30 + 'px MyCustomFont';
@@ -530,17 +530,17 @@ function drawHUD() {
     if (
         (ctx.clearRect(0, 0, window.innerWidth, window.innerHeight), tutoText)
     )
-        // drawText(
-        //     window.innerWidth / 2 - 18 * (tutoText.length / 2),
-        //     window.innerHeight / 2 + 144,
-        //     tutoText.toUpperCase(),
-        //     3
-        // );
-        {
-            ctx.textAlign = "center";
-            ctx.font = 30 + 'px MyCustomFont';
-            ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
-        }
+    // drawText(
+    //     window.innerWidth / 2 - 18 * (tutoText.length / 2),
+    //     window.innerHeight / 2 + 144,
+    //     tutoText.toUpperCase(),
+    //     3
+    // );
+    {
+        ctx.textAlign = "center";
+        ctx.font = 30 + 'px MyCustomFont';
+        ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
+    }
     else if (!isWin) {
         ctx.textAlign = "left";
         ctx.font = 20 + 'px MyCustomFont';
@@ -555,10 +555,12 @@ function drawHUD() {
     }
 }
 function tick() {
-    frame++,
-        drawScene(),
-        drawHUD(),
-        (rafTick = requestAnimationFrame(tick));
+    frame++;
+    drawScene();
+    drawHUD();
+    setTimeout(() => {
+        tick();
+    }, 1000 / 60);
 }
 function resize() {
     var e = document.getElementById("game");
@@ -1649,47 +1651,47 @@ var tutoNumber = !1,
                     (selectedPlayer + 1) % levels[gameLevel].starts.length;
         }
     });
-    var tuto = {
-        1: [
-          [{ x: 2, y: 2, z: -8 }, "Đây là bạn. Di chuyển bằng các phím mũi tên", 4e3],
-          [{ x: 14, y: 2, z: -8 }, "Cẩn thận với các lỗ", 3e3],
-          [{ x: 22, y: 2, z: -8 }, "Đây là mục tiêu của bạn, lấy quả cầu để thắng", 4e3],
-        ],
-        2: [[{ x: 12, y: 2, z: 0 }, "Bạn có thể đẩy các thùng", 3e3]],
-        5: [
-          [
+var tuto = {
+    1: [
+        //   [{ x: 2, y: 2, z: -8 }, "Đây là bạn. Di chuyển bằng các phím mũi tên", 4e3],
+        //   [{ x: 14, y: 2, z: -8 }, "Cẩn thận với các lỗ", 3e3],
+        //   [{ x: 22, y: 2, z: -8 }, "Đây là mục tiêu của bạn, lấy quả cầu để thắng", 4e3],
+    ],
+    2: [[{ x: 12, y: 2, z: 0 }, "Bạn có thể đẩy các thùng", 3e3]],
+    5: [
+        [
             { x: 2, y: -2, z: -6 },
             "Đây là một công tắc, nó thay đổi một cái gì đó trong sân khấu",
             3e3,
-          ],
         ],
-        6: [
-          [
+    ],
+    6: [
+        [
             { x: 2, y: -2, z: -6 },
             "Đây là một loại kích hoạt khác, phải giữ nó được nhấn",
             3e3,
-          ],
         ],
-        7: [
-          [
+    ],
+    7: [
+        [
             { x: 8, y: 6, z: 0 },
             "Đây là một nhân bản của bạn.",
             3e3,
-          ],
-          [
+        ],
+        [
             { x: 8, y: 6, z: 0 },
             "Chuyển đổi giữa các nhân bản bằng phím cách",
             4e3,
-          ],
         ],
-        12: [
-          [
+    ],
+    12: [
+        [
             { x: 8, y: -2, z: -8 },
             "Khối này không thể di chuyển, nhưng có thể leo lên",
             4e3,
-          ],
         ],
-      };
+    ],
+};
 
 initLevels = function () {
     levels = {
