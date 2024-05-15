@@ -1,3 +1,5 @@
+isWin = false;
+
 function SfxrP() {
     this.set = function (e) {
         for (var t = 0; 24 > t; t++)
@@ -277,6 +279,10 @@ function initBuffers() {
         (cubeVertexIndexBuffer.numItems = e.length);
 }
 function drawScene() {
+    if (isWin) {
+        drawHUDEnd();
+        return;
+    }
     ctx.font = 30 + 'px MyCustomFont';
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight),
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT),
@@ -491,25 +497,21 @@ function drawScene() {
     });
 }
 function drawHUDEnd() {
-    ctx.font = 30 + 'px MyCustomFont';
-    frame++;
+    if (isWin)
+        return;
+    alert("Bạn đã hoàn thành tẩt cả các màn trong trò chơi!");
+    // load
+    window.location.reload();
+    isWin = true;
+    console.log("End");
+    ctx.font = 80 + 'px MyCustomFont';
+    // frame++;
     ctx.fillStyle = "#000000";
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
-        (t = "SOKOBAN 3D"),
-        drawText(window.innerWidth / 2 - 90 * (t.length / 2), 100, t, 15),
-        (t =
-            "     CONGRATULATIONS !&YOU MADE IT IN " +
-            nbMoves +
-            " MOVES !&  (BEST POSSIBLE IS 1024)"),
-        drawText(
-            window.innerWidth / 2 - 567,
-            500 + 10 * Math.sin(frame / 64),
-            t,
-            7
-        ),
-        (rafHUD = requestAnimationFrame(drawHUDEnd));
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
+    ctx.fillText("Có thể trò chơi quá dễ với bạn!", canvasHUD.width / 2, canvasHUD.height / 2 - 100);
+
 }
 function drawHUDHome() {
     ctx.font = canvasHUD.width / 10 + 'px MyCustomFont';
@@ -539,17 +541,17 @@ function drawHUD() {
             ctx.font = 30 + 'px MyCustomFont';
             ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
         }
-    else {
-        // ctx.textAlign = "left";
-        // ctx.font = 20 + 'px MyCustomFont';
-        // ctx.fillStyle = "#ffffff";
-        // ctx.fillText("Số bước: " + nbMoves, 20, 50);
-        // ctx.fillText("M - Tắt âm thanh", 20, 90);
-        // ctx.fillText("R - Chơi lại", 20, 130);
+    else if (!isWin) {
+        ctx.textAlign = "left";
+        ctx.font = 20 + 'px MyCustomFont';
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText("Số bước: " + nbMoves, 20, 50);
+        ctx.fillText("M - Tắt âm thanh", 20, 90);
+        ctx.fillText("R - Chơi lại", 20, 130);
 
-        // ctx.textAlign = "center";
-        // ctx.font = 30 + 'px MyCustomFont';
-        // ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
+        ctx.textAlign = "center";
+        ctx.font = 30 + 'px MyCustomFont';
+        ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
     }
 }
 function tick() {
@@ -1024,7 +1026,7 @@ var speedZ = (frame = totalMove = 0),
     level,
     levels,
     fov = 45,
-    gameLevel = 0,
+    gameLevel = 1,
     levelDrawing = !1,
     levelExplode = !1,
     zoomOn = !1;
@@ -1514,7 +1516,7 @@ var speedZ = (frame = totalMove = 0),
                 x: -8,
                 y: 16,
                 z: 23,
-                rotation: { x: -1.3, y: 0, z: 63 },
+                rotation: { x: -2, y: 0, z: 63 },
             });
         var e = levels[gameLevel];
         e.triggers.push({
@@ -1655,8 +1657,7 @@ var tutoNumber = !1,
                 break;
             // p
             case 80:
-                gameLevel++;
-                gameOver();
+                nextLevel();
                 break;
         }
     }),
@@ -1730,26 +1731,6 @@ var tutoNumber = !1,
 
 initLevels = function () {
     levels = {
-        0: {
-            width: 28,
-            height: 100,
-            starts: [{ x: 1, y: 4 }],
-            end: { x: 10, y: 99 },
-            data: [
-                "2222222222222222222222222222",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2111111111111111111111111112",
-                "2222222222222222222222222222",
-            ],
-            objects: [],
-            triggers: [],
-        },
         1: {
             width: 14,
             height: 8,
@@ -1974,7 +1955,7 @@ initLevels = function () {
             width: 17,
             height: 12,
             best: 204,
-            starts: [{ x: 4, y: 6 }],
+            starts: [{ x: 9, y: 6 }],
             end: { x: 16, y: 6 },
             data: [
                 "41111111111133333",
@@ -2145,30 +2126,32 @@ initLevels = function () {
             triggers: [],
         },
         17: {
-            width: 10,
-            height: 10,
+            width: 27,
+            height: 12,
             starts: [
-                { x: 1, y: 5 },
-                { x: 1, y: 6 },
-                { x: 1, y: 7 },
+                { x: 11, y: 11 },
+                { x: 19, y: 10 },
+                { x: 20, y: 10 },
             ],
-            end: { x: 7, y: 8 },
+            end: { x: 11, y: 6 },
             data: [
-                "0000000000",
-                "0000000000",
-                "0000000000",
-                "3333233300",
-                "2111111300",
-                "2111111100",
-                "2111111300",
-                "2111133330",
-                "2111113330",
-                "2222133330",
+                "111111111111111111111111111",
+                "112111211122211122222111111",
+                "112111211211121111211111111",
+                "112111211211121111211111111",
+                "112212211211121111211111111",
+                "112111211222221111211111111",
+                "112111211211121111211111111",
+                "112111211211121122222111111",
+                "111111111111111111111111111",
+                "111111111111111111111111111",
+                "111111111111111111111111111",
+                "555555555555555555555555555",
             ],
-            objects: [[4, 8]],
+            objects: [[4, 4, 2]],
             triggers: [
-                { x: 6, y: 5, type: 2, on: [[6, 5, 1, 2]] },
-                { x: 4, y: 3, type: 2, on: [[4, 3, 2, 3]] },
+                // { x: 1, y: 5, type: 2, on: [[4, 3, 1, 3]] },
+                // { x: 4, y: 2, type: 2, on: [[4, 2, 1, 3]] },
             ],
         },
     };
