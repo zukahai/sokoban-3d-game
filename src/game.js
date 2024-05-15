@@ -1716,7 +1716,12 @@ var tutoNumber = !1,
         7: [
           [
             { x: 8, y: 6, z: 0 },
-            "Đây là một người chơi khác. Chuyển đổi giữa các người chơi bằng phím cách",
+            "Đây là một người chơi khác.",
+            3e3,
+          ],
+          [
+            { x: 8, y: 6, z: 0 },
+            "Chuyển đổi giữa các người chơi bằng phím cách",
             4e3,
           ],
         ],
