@@ -378,8 +378,8 @@ function drawScene() {
                 selectedPlayer: t == selectedPlayer,
             });
     }
-    for (var i = 0; i < levels[levelEnCours].width; i++)
-        for (var n = 0; n < levels[levelEnCours].height; n++) {
+    for (var i = 0; i < levels[gameLevel].width; i++)
+        for (var n = 0; n < levels[gameLevel].height; n++) {
             var a = level[i][n],
                 l = a.h + a.o.length;
             if ((a.h || (l = -10), a.o.length))
@@ -507,7 +507,7 @@ function drawScene() {
                 lightsDisplayed.push(lights[t + 2]),
                 lightsDisplayed.push(lights[t + 3]));
     }
-    var v = levels[levelEnCours];
+    var v = levels[gameLevel];
     drawCube({
         x: 2 * v.end.x,
         y: 2 * -v.end.y,
@@ -523,10 +523,11 @@ function drawScene() {
 }
 function drawHUDEnd() {
     ctx.font = 30 + 'px MyCustomFont';
-    frame++,
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight),
-        (ctx.fillStyle = "#7F40D9"),
-        ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
+    frame++;
+    ctx.fillStyle = "#000000";
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
         (t = "SOKOBAN 3D"),
         drawText(window.innerWidth / 2 - 90 * (t.length / 2), 100, t, 15),
         (t =
@@ -542,38 +543,44 @@ function drawHUDEnd() {
         (rafHUD = requestAnimationFrame(drawHUDEnd));
 }
 function drawHUDHome() {
-    ctx.font = 30 + 'px MyCustomFont';
-    frame++,
-        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight),
-        (ctx.fillStyle = "#7F40D9"),
-        ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
-        (t = "SOKOBAN 3D"),
-        drawText(window.innerWidth / 2 - 90 * (t.length / 2), 100, t, 15),
-        (t = "PRESS A KEY TO START"),
-        drawText(
-            window.innerWidth / 2 - 42 * (t.length / 2),
-            500 + 10 * Math.sin(frame / 64),
-            t,
-            7
-        ),
-        (rafHUD = requestAnimationFrame(drawHUDHome));
+    ctx.font = canvasHUD.width / 10 + 'px MyCustomFont';
+    frame++;
+    ctx.fillStyle = "#000000";
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.fillRect(0, 0, canvasHUD.width, canvasHUD.height),
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
+    ctx.fillText("SOKOBAN 3D", canvasHUD.width / 2, canvasHUD.height / 2 - 100);
+    ctx.font = canvasHUD.width / 30 + 'px MyCustomFont';
+    ctx.fillText("Bấm phím A để bắt đầu", canvasHUD.width / 2, canvasHUD.height / 2 + 100);
 }
 function drawHUD() {
     ctx.font = 30 + 'px MyCustomFont';
     if (
         (ctx.clearRect(0, 0, window.innerWidth, window.innerHeight), tutoText)
     )
-        drawText(
-            window.innerWidth / 2 - 18 * (tutoText.length / 2),
-            window.innerHeight / 2 + 144,
-            tutoText.toUpperCase(),
-            3
-        );
+        // drawText(
+        //     window.innerWidth / 2 - 18 * (tutoText.length / 2),
+        //     window.innerHeight / 2 + 144,
+        //     tutoText.toUpperCase(),
+        //     3
+        // );
+        {
+            ctx.textAlign = "center";
+            ctx.font = 30 + 'px MyCustomFont';
+            ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
+        }
     else {
-        drawText(10, 10, nbMoves + " MOVE" + (nbMoves > 1 ? "S" : ""), 3);
-        var e = "STAGE " + levelEnCours;
-        drawText(window.innerWidth / 2 - 27 * (e.length / 2), 20, e, 4.5),
-            drawText(10, 100, "M - MUTE&R - RETRY", 3);
+        ctx.textAlign = "left";
+        ctx.font = 20 + 'px MyCustomFont';
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText("Số bước: " + nbMoves, 20, 50);
+        ctx.fillText("M - Tắt âm thanh", 20, 90);
+        ctx.fillText("R - Chơi lại", 20, 130);
+
+        ctx.textAlign = "center";
+        ctx.font = 30 + 'px MyCustomFont';
+        ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
     }
 }
 function tick() {
@@ -1048,7 +1055,7 @@ var speedZ = (frame = totalMove = 0),
     level,
     levels,
     fov = 45,
-    levelEnCours = 10,
+    gameLevel = 1,
     levelDrawing = !1,
     levelExplode = !1,
     zoomOn = !1;
@@ -1503,7 +1510,7 @@ var speedZ = (frame = totalMove = 0),
     (nextLevel = function () {
         (nbMovesAtStart = nbMoves),
             (levelExplode = !1),
-            18 == ++levelEnCours
+            18 == ++gameLevel
                 ? (cancelAnimationFrame(tick), drawHUDEnd())
                 : initGame();
     }),
@@ -1512,7 +1519,7 @@ var speedZ = (frame = totalMove = 0),
             (vitesseRotation = 10),
             (levelExplode = !0),
             (levelExplodeSince = 200);
-        for (var e = levels[levelEnCours], t = 0; t < e.width; t++)
+        for (var e = levels[gameLevel], t = 0; t < e.width; t++)
             for (var a = 0; a < e.height; a++)
                 (level[t][a].speedZ = 3 * Math.random()),
                     (level[t][a].o = []),
@@ -1540,7 +1547,7 @@ var speedZ = (frame = totalMove = 0),
                 z: 23,
                 rotation: { x: -1.3, y: 0, z: 63 },
             });
-        var e = levels[levelEnCours];
+        var e = levels[gameLevel];
         e.triggers.push({
             x: e.end.x,
             y: e.end.y,
@@ -1613,13 +1620,13 @@ var speedZ = (frame = totalMove = 0),
 var tutoNumber = !1,
     tutoText = !1;
 (startTuto = function () {
-    tuto[levelEnCours]
+    tuto[gameLevel]
         ? ((tutoNumber = -1), nextTuto())
         : addPlayerControl();
 }),
     (nextTuto = function () {
-        if ((tutoNumber++, tuto[levelEnCours][tutoNumber])) {
-            var e = tuto[levelEnCours][tutoNumber];
+        if ((tutoNumber++, tuto[gameLevel][tutoNumber])) {
+            var e = tuto[gameLevel][tutoNumber];
             (zoomOn = e[0]), (tutoText = e[1]), setTimeout(nextTuto, e[2]);
         } else
             (zoomOn = !1),
@@ -1676,6 +1683,12 @@ var tutoNumber = !1,
                 break;
             case 17:
             case 32:
+                break;
+            // p
+            case 80:
+                gameLevel++;
+                gameOver();
+                break;
         }
     }),
     (document.onkeyup = function (e) {
@@ -1706,45 +1719,46 @@ var tutoNumber = !1,
                 break;
             case 32:
                 selectedPlayer =
-                    (selectedPlayer + 1) % levels[levelEnCours].starts.length;
+                    (selectedPlayer + 1) % levels[gameLevel].starts.length;
         }
     });
-var tuto = {
-    1: [
-        [{ x: 2, y: 2, z: -8 }, "this is you. Move with arrow keys", 4e3],
-        [{ x: 14, y: 2, z: -8 }, "Watch out for holes", 3e3],
-        [{ x: 22, y: 2, z: -8 }, "this is your goal, get the orb", 4e3],
-    ],
-    2: [[{ x: 12, y: 2, z: 0 }, "You can push the crates", 3e3]],
-    5: [
-        [
-            { x: 2, y: -2, z: -6 },
-            "this is a switch, which modifies something in the stage",
-            3e3,
+    var tuto = {
+        1: [
+          [{ x: 2, y: 2, z: -8 }, "Đây là bạn. Di chuyển bằng các phím mũi tên", 4e3],
+          [{ x: 14, y: 2, z: -8 }, "Cẩn thận với các lỗ", 3e3],
+          [{ x: 22, y: 2, z: -8 }, "Đây là mục tiêu của bạn, lấy quả cầu để thắng", 4e3],
         ],
-    ],
-    6: [
-        [
+        2: [[{ x: 12, y: 2, z: 0 }, "Bạn có thể đẩy các thùng", 3e3]],
+        5: [
+          [
             { x: 2, y: -2, z: -6 },
-            "this is another sort of trigger, have to keep it pressed",
+            "Đây là một công tắc, nó thay đổi một cái gì đó trong sân khấu",
             3e3,
+          ],
         ],
-    ],
-    7: [
-        [
+        6: [
+          [
+            { x: 2, y: -2, z: -6 },
+            "Đây là một loại kích hoạt khác, phải giữ nó được nhấn",
+            3e3,
+          ],
+        ],
+        7: [
+          [
             { x: 8, y: 6, z: 0 },
-            "this is another player. Switch between players with space key",
+            "Đây là một người chơi khác. Chuyển đổi giữa các người chơi bằng phím cách",
             4e3,
+          ],
         ],
-    ],
-    12: [
-        [
+        12: [
+          [
             { x: 8, y: -2, z: -8 },
-            "this block cannot be moved, but it is climbable",
+            "Khối này không thể di chuyển, nhưng có thể leo lên",
             4e3,
+          ],
         ],
-    ],
-};
+      };
+
 initLevels = function () {
     levels = {
         1: {
