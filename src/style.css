@@ -1,0 +1,47 @@
+      body {
+          margin: 0;
+      }
+
+      #HUD {
+          position: absolute;
+          top: 0;
+          left: 0;
+      }
+
+      @font-face {
+          font-family: 'MyCustomFont';
+          src: url('../fonts/NVN\ PixelFJVerdana8pt.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+      * {
+          font-family: 'MyCustomFont', sans-serif;
+      }
+
+      body {
+          background-size: cover;
+      }
+
+      body {
+          background-color: white;
+          margin: 0px;
+          text-align: center;
+      }
+
+      html,
+      body {
+          margin: 0;
+          height: 100%;
+          overflow: hidden;
+          /* background-color: black; */
+      }
+
+      html {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+      }
+
+      html {
+          overflow-y: hidden;
+      }
