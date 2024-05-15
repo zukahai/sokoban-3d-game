@@ -540,16 +540,16 @@ function drawHUD() {
             ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
         }
     else {
-        ctx.textAlign = "left";
-        ctx.font = 20 + 'px MyCustomFont';
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("Số bước: " + nbMoves, 20, 50);
-        ctx.fillText("M - Tắt âm thanh", 20, 90);
-        ctx.fillText("R - Chơi lại", 20, 130);
+        // ctx.textAlign = "left";
+        // ctx.font = 20 + 'px MyCustomFont';
+        // ctx.fillStyle = "#ffffff";
+        // ctx.fillText("Số bước: " + nbMoves, 20, 50);
+        // ctx.fillText("M - Tắt âm thanh", 20, 90);
+        // ctx.fillText("R - Chơi lại", 20, 130);
 
-        ctx.textAlign = "center";
-        ctx.font = 30 + 'px MyCustomFont';
-        ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
+        // ctx.textAlign = "center";
+        // ctx.font = 30 + 'px MyCustomFont';
+        // ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
     }
 }
 function tick() {
@@ -1024,7 +1024,7 @@ var speedZ = (frame = totalMove = 0),
     level,
     levels,
     fov = 45,
-    gameLevel = 1,
+    gameLevel = 0,
     levelDrawing = !1,
     levelExplode = !1,
     zoomOn = !1;
@@ -1730,6 +1730,26 @@ var tutoNumber = !1,
 
 initLevels = function () {
     levels = {
+        0: {
+            width: 28,
+            height: 100,
+            starts: [{ x: 1, y: 4 }],
+            end: { x: 10, y: 99 },
+            data: [
+                "2222222222222222222222222222",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2111111111111111111111111112",
+                "2222222222222222222222222222",
+            ],
+            objects: [],
+            triggers: [],
+        },
         1: {
             width: 14,
             height: 8,
