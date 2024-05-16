@@ -1,5 +1,21 @@
 isWin = false;
 
+function getParameter(paramName) {
+    // Lấy URL hiện tại của trình duyệt
+    var urlParams = new URLSearchParams(window.location.search);
+    var paramValue = urlParams.get(paramName);
+    return paramValue;
+}
+
+function getLevel(maxLevel) {
+    let level = getParameter('l') || getParameter('level');
+    level = (level == undefined) ? 1 : level;
+    level = (level <= 1) ? 1 : level;
+    level = (level >= maxLevel) ? (maxLevel - 1) : level;
+    console.log(level);
+    return Math.floor(level);
+}
+
 function SfxrP() {
     this.set = function (e) {
         for (var t = 0; 24 > t; t++)
@@ -260,7 +276,7 @@ function initTexture() {
         (crate.image.onload = function () {
             handleLoadedTexture(crate);
         }),
-        (crate.image.src = "./crate.png");
+        (crate.image.src = "./assets/images/crate.png");
 }
 function degToRad(e) {
     return (e * Math.PI) / 180;
@@ -499,7 +515,7 @@ function drawScene() {
 function drawHUDEnd() {
     if (isWin)
         return;
-    alert("Bạn đã hoàn thành tẩt cả các màn trong trò chơi!");
+    alert("Bạn đã hoàn thành tất cả các màn trong trò chơi!");
     // load
     window.location.reload();
     isWin = true;
@@ -554,12 +570,12 @@ function drawHUD() {
         ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
     }
 }
-function tick() {
+function loop() {
     frame++;
     drawScene();
     drawHUD();
     setTimeout(() => {
-        tick();
+        loop();
     }, 1000 / 60);
 }
 function resize() {
@@ -985,10 +1001,11 @@ var speedZ = (frame = totalMove = 0),
     level,
     levels,
     fov = 45,
-    gameLevel = 1,
+    gameLevel = getLevel(17),
     levelDrawing = !1,
     levelExplode = !1,
     zoomOn = !1;
+    timeOutTuto = 0;
 (getP = function (e, t, a) {
     return (
         (e /= 2),
@@ -1441,7 +1458,7 @@ var speedZ = (frame = totalMove = 0),
         (nbMovesAtStart = nbMoves),
             (levelExplode = !1),
             18 == ++gameLevel
-                ? (cancelAnimationFrame(tick), drawHUDEnd())
+                ? (cancelAnimationFrame(loop), drawHUDEnd())
                 : initGame();
     }),
     (explodeLevel = function () {
@@ -1466,7 +1483,7 @@ var speedZ = (frame = totalMove = 0),
                         z: 0.1 * Math.random(),
                     });
     }),
-    (rafTick = null),
+    (rafloop = null),
     (rafHUD = null),
     (waitingKeyStart = !0),
     (initGame = function () {
@@ -1557,7 +1574,8 @@ var tutoNumber = !1,
     (nextTuto = function () {
         if ((tutoNumber++, tuto[gameLevel][tutoNumber])) {
             var e = tuto[gameLevel][tutoNumber];
-            (zoomOn = e[0]), (tutoText = e[1]), setTimeout(nextTuto, e[2]);
+            (zoomOn = e[0]), (tutoText = e[1]);
+            timeOutTuto = setTimeout(nextTuto, e[2]);
         } else
             (zoomOn = !1),
                 (tutoNumber = !1),
@@ -1590,7 +1608,7 @@ var tutoNumber = !1,
     (document.onkeydown = function (e) {
         switch (
         (waitingKeyStart &&
-            ((waitingKeyStart = !1), tick(), cancelAnimationFrame(rafHUD)),
+            ((waitingKeyStart = !1), loop(), cancelAnimationFrame(rafHUD)),
             e.keyCode)
         ) {
             case 90:
@@ -1614,10 +1632,12 @@ var tutoNumber = !1,
             case 17:
             case 32:
                 break;
-            // p
-            case 80:
-                nextLevel();
-                break;
+            // // p
+            // case 80:
+            //     nextLevel();
+            //     gameOver();
+            //     timeOutTuto ? clearTimeout(timeOutTuto) : null;
+            //     break;
         }
     }),
     (document.onkeyup = function (e) {
