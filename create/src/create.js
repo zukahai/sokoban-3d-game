@@ -214,7 +214,7 @@ class Create {
         this.context.fillStyle = "#03fc6f";
         this.xA = 0;
         this.yA = 0;
-        this.sizeBlock = 100;
+        this.sizeBlock = this.getSizeBlock();
         this.context.textAlign = 'center';
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
@@ -226,17 +226,34 @@ class Create {
     drawText() {
         // danh sách màu đỏ đậm dần
         let colors = ["", "#f5eeed", "#f5b9b5", "#f77c74", "#f77c74", "#f71607", "#f71607", "#f71607", "#f71607"]
-        this.context.font = (50) + 'px NVNPixelFJVerdana8pt';
+        this.context.font = this.sizeBlock / 2 + 'px NVNPixelFJVerdana8pt';
         this.xA = 0;
         this.yA = 0;
-        this.sizeBlock = 100;
         this.context.textAlign = 'center';
         for (let i = 0; i < this.height; i++) {
             for (let j = 0; j < this.width; j++) {
                 this.context.fillStyle = colors[this.data.data[i][j]];
-                this.context.fillText(this.data.data[i][j], this.xA + j * this.sizeBlock + this.sizeBlock / 2, this.yA + i * this.sizeBlock + this.sizeBlock / 2);
+                this.context.fillText(this.data.data[i][j], this.xA + j * this.sizeBlock + this.sizeBlock / 2, this.yA + i * this.sizeBlock + this.sizeBlock / 1.5);
             }
         }
+        
+        let tutorial = [
+            "R:     Làm mới",
+            "↑:     Thêm hàng trên",
+            "↓:     Thêm hàng dưới",
+            "←:     Thêm cột trái",
+            "→:     Thêm cột phải",
+            "Enter: Lưu và chơi thử",
+            "Click: Thay đổi giá trị (0→9)"
+        ];
+        
+        this.context.fillStyle = "white";
+        this.context.textAlign = 'left';
+        this.context.font = (20) + 'px NVNPixelFJVerdana8pt';
+
+        tutorial.forEach((t, i) => {
+            this.context.fillText(t, this.gameWidth * 0.75 + 20, 100 + i * 30);
+        });
     }
 
 
@@ -297,6 +314,13 @@ class Create {
 
     isMobile() {
         return this.gameWidth < this.gameHeight;
+    }
+
+    getSizeBlock() {
+        let w = 0.75 * this.gameWidth;
+        let h = this.gameHeight;
+        let size = Math.min(w / this.width, h / this.height);
+        return size;
     }
 }
 
