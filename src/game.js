@@ -7,9 +7,6 @@ function getParameter(paramName) {
     return paramValue;
 }
 
-function setLocalStorage(key, value) {
-    localStorage.setItem(key, value);
-}
 
 function getLevel(maxLevel = NUMBER_OF_LEVEL) {
     let level = getParameter('l') || getParameter('level');
@@ -1469,7 +1466,6 @@ timeOutTuto = 0;
         (NUMBER_OF_LEVEL + 1) == ++gameLevel
             ? (cancelAnimationFrame(loop), drawHUDEnd())
             : initGame();
-        setLocalStorage("test", JSON.stringify(levels[11]));
     }),
     (explodeLevel = function () {
         (players = []),
