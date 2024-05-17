@@ -1,8 +1,17 @@
+image = new Image();
+image.src = "../../assets/images/crate.png";
+
 class Create {
     constructor() {
         this.canvas = null;
         this.context = null;
-        this.reset();
+        if (localStorage.getItem("test") != null) {
+            this.data = JSON.parse(localStorage.getItem("test"));
+            this.width = this.data.width;
+            this.height = this.data.height;
+        } else {
+            this.reset();
+        }
         this.init();
         this.listenMouse();
         this.listenKeyboard();
@@ -19,7 +28,7 @@ class Create {
             starts: [
                 { x: 0, y: 0 },
             ],
-            end: { x: 4, y: 1 },
+            end: { x: 4, y: 2 },
             data: [
                 "11111",
                 "11111",
@@ -31,23 +40,23 @@ class Create {
                 [2, 2, 2]
             ],
             triggers: [
-                { 
-                    x: 1, 
-                    y: 1, 
-                    type: 2, 
-                    on: [
-                        [2, 3, 1, 2]
-                    ] 
-                },
-                {
-                    x: 1,
-                    y: 2,
-                    type: 1,
-                    on: [
-                        [1, 3, 1, 2]
-                    ]
-                },
-                
+                // {
+                //     x: 1,
+                //     y: 1,
+                //     type: 2,
+                //     on: [
+                //         [2, 3, 1, 2]
+                //     ]
+                // },
+                // {
+                //     x: 1,
+                //     y: 2,
+                //     type: 1,
+                //     on: [
+                //         [1, 3, 1, 2]
+                //     ]
+                // },
+
             ],
         }
         this.width = this.data.data[0].length;
@@ -113,6 +122,17 @@ class Create {
 
     }
 
+    solveMouse(x, y) {
+        console.log(x, y);
+        let row = Math.floor((y - this.yA) / this.sizeBlock);
+        let col = Math.floor((x - this.xA) / this.sizeBlock);
+        console.log(row, col);
+        let value = this.data.data[row][col];
+        value = Math.floor(value) + 1;
+        value = value % 10;
+        this.data.data[row] = this.data.data[row].substring(0, col) + value + this.data.data[row].substring(col + 1);
+    }
+
     listenKeyboard() {
         document.addEventListener("keydown", evt => {
             switch (evt.keyCode) {
@@ -149,6 +169,7 @@ class Create {
         document.addEventListener("mousedown", evt => {
             var x = evt.offsetX == undefined ? evt.layerX : evt.offsetX;
             var y = evt.offsetY == undefined ? evt.layerY : evt.offsetY;
+            this.solveMouse(x, y);
         })
 
         document.addEventListener("mousemove", evt => {
@@ -189,8 +210,71 @@ class Create {
         }
     }
 
+    drawScreen() {
+        this.context.fillStyle = "#03fc6f";
+        this.xA = 0;
+        this.yA = 0;
+        this.sizeBlock = 100;
+        this.context.textAlign = 'center';
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                this.context.fillRect(this.xA + j * this.sizeBlock + this.sizeBlock / 20, this.yA + i * this.sizeBlock + this.sizeBlock / 20, this.sizeBlock - this.sizeBlock / 10, this.sizeBlock - this.sizeBlock / 10);
+            }
+        }
+    }
+
+    drawText() {
+        // danh sách màu đỏ đậm dần
+        let colors = ["", "#f5eeed", "#f5b9b5", "#f77c74", "#f77c74", "#f71607", "#f71607", "#f71607", "#f71607"]
+        this.context.font = (50) + 'px NVNPixelFJVerdana8pt';
+        this.xA = 0;
+        this.yA = 0;
+        this.sizeBlock = 100;
+        this.context.textAlign = 'center';
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                this.context.fillStyle = colors[this.data.data[i][j]];
+                this.context.fillText(this.data.data[i][j], this.xA + j * this.sizeBlock + this.sizeBlock / 2, this.yA + i * this.sizeBlock + this.sizeBlock / 2);
+            }
+        }
+    }
+
+
+    drawItem() {
+        this.drawCircle(this.data.end.x * this.sizeBlock + this.sizeBlock / 2, this.data.end.y * this.sizeBlock + this.sizeBlock / 2, this.sizeBlock / 4);
+        this.data.starts.forEach(start => {
+            this.drawSquare(start.x * this.sizeBlock + this.sizeBlock / 4, start.y * this.sizeBlock + this.sizeBlock / 4, this.sizeBlock / 2, "black");
+        });
+        this.data.objects.forEach(object => {
+            if (object.length == 2)
+                this.context.drawImage(image, object[0] * this.sizeBlock + this.sizeBlock / 4, object[1] * this.sizeBlock + this.sizeBlock / 4, this.sizeBlock / 2, this.sizeBlock / 2);
+            else
+                this.drawSquare(object[0] * this.sizeBlock + this.sizeBlock / 4, object[1] * this.sizeBlock + this.sizeBlock / 4, this.sizeBlock / 2, "cyan");
+        });
+        this.data.triggers.forEach(trigger => {
+            let color = (trigger.type == 1) ? "blue" : "green";
+            this.drawSquare(trigger.x * this.sizeBlock + 0.6 * this.sizeBlock, trigger.y * this.sizeBlock + 0.6 * this.sizeBlock, this.sizeBlock / 3, color);
+        });
+    }
+
+    drawSquare(x, y, size, color) {
+        this.context.fillStyle = color;
+        this.context.fillRect(x, y, size, size);
+    }
+
+    drawCircle(x, y, r) {
+        this.context.fillStyle = "#cf30b9";
+        this.context.beginPath();
+        this.context.arc(x, y, r, 0, 2 * Math.PI);
+        this.context.fill();
+        this.context.stroke();
+        this.context.closePath();
+    }
+
     draw() {
         this.clearScreen();
+        this.drawScreen();
+        this.drawItem();
         this.drawText();
     }
 
@@ -204,12 +288,6 @@ class Create {
         this.context.fillText("FPS: " + fps, 50, 50);
     }
 
-    drawText() {
-        this.context.font = (40) + 'px NVNPixelFJVerdana8pt';
-        this.context.textAlign = 'left';
-        this.context.fillStyle = "white";
-        this.context.fillText("Create", 10, this.gameHeight / 2);
-    }
 
     clearScreen() {
         this.context.clearRect(0, 0, this.gameWidth, this.gameHeight);
