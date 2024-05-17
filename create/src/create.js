@@ -23,6 +23,25 @@ class Create {
         localStorage.setItem("test", JSON.stringify(this.data));
     }
 
+    saveFile() {
+        const jsonData = JSON.stringify(this.data, null, 2);
+
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "data.json";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+
+        // Xóa liên kết tạm thời
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+    }
+
     reset() {
         this.data = {
             starts: [
@@ -61,6 +80,9 @@ class Create {
         }
         this.width = this.data.data[0].length;
         this.height = this.data.data.length;
+        this.isP = false;
+        this.isQ = false;
+        this.isS = false;
     }
 
     addRowBottom() {
@@ -123,14 +145,77 @@ class Create {
     }
 
     solveMouse(x, y) {
-        console.log(x, y);
+        if (x < this.xA || x > this.xA + this.width * this.sizeBlock || y < this.yA || y > this.yA + this.height * this.sizeBlock) return;
         let row = Math.floor((y - this.yA) / this.sizeBlock);
         let col = Math.floor((x - this.xA) / this.sizeBlock);
+        if (this.isP) {
+            this.solveP(row, col);
+            return;
+        }
+        if (this.isQ) {
+            this.solveQ(row, col);
+            return;
+        }
+        if (this.isS) {
+            this.solveS(row, col);
+            return;
+        }
+
         console.log(row, col);
         let value = this.data.data[row][col];
         value = Math.floor(value) + 1;
         value = value % 10;
         this.data.data[row] = this.data.data[row].substring(0, col) + value + this.data.data[row].substring(col + 1);
+    }
+
+    solveP(row, col) {
+        let x = col;
+        let y = row;
+        let index = -1;
+        this.data.objects.forEach((object, i) => {
+            if (object[0] == x && object[1] == y) {
+                index = i;
+            }
+        });
+        if (index != -1) {
+            this.data.objects.splice(index, 1);
+        } else {
+            this.data.objects.push([x, y]);
+        }
+        this.isP = false;
+    }
+
+    solveQ(row, col) {
+        let x = col;
+        let y = row;
+        let index = -1;
+        this.data.objects.forEach((object, i) => {
+            if (object[0] == x && object[1] == y) {
+                index = i;
+            }
+        }
+        );
+        if (index != -1) {
+            this.data.objects.splice(index, 1);
+        } else {
+            this.data.objects.push([x, y, 2]);
+        }
+    }
+
+    solveS(row, col) {
+        let x = col;
+        let y = row;
+        let index = -1;
+        this.data.starts.forEach((start, i) => {
+            if (start.x == x && start.y == y) {
+                index = i;
+            }
+        });
+        if (index != -1) {
+            this.data.starts.splice(index, 1);
+        } else {
+            this.data.starts.push({ x: x, y: y });
+        }
     }
 
     listenKeyboard() {
@@ -159,6 +244,22 @@ class Create {
                 // r
                 case 82:
                     this.reset()
+                    break;
+                //p
+                case 80:
+                    this.isP = !this.isP;
+                    break;
+                //q
+                case 81:
+                    this.isQ = !this.isQ;
+                    break;
+                //s
+                case 83:
+                    this.isS = !this.isS;
+                    break;
+                //h
+                case 72:
+                    this.saveFile();
                     break;
 
             }
@@ -236,23 +337,30 @@ class Create {
                 this.context.fillText(this.data.data[i][j], this.xA + j * this.sizeBlock + this.sizeBlock / 2, this.yA + i * this.sizeBlock + this.sizeBlock / 1.5);
             }
         }
-        
+
         let tutorial = [
-            "R:     Làm mới",
-            "↑:     Thêm hàng trên",
-            "↓:     Thêm hàng dưới",
-            "←:     Thêm cột trái",
-            "→:     Thêm cột phải",
+            "R: Làm mới",
+            "↑: Thêm hàng trên",
+            "↓: Thêm hàng dưới",
+            "←: Thêm cột trái",
+            "→: Thêm cột phải",
             "Enter: Lưu và chơi thử",
-            "Click: Thay đổi giá trị (0→9)"
+            "Click: Thay đổi giá trị (0→9)",
+            "S: Thêm điểm xuất phát",
+            "P: Đặt, huỷ khối thường",
+            "Q: Đặt, huỷ khối leo",
+            "B: Đặt,huỷ công tắc thường",
+            "M: Đặt, huỷ công tắc giữ",
+            "H: Lưu file với dữ liệu và data",
         ];
-        
+
         this.context.fillStyle = "white";
         this.context.textAlign = 'left';
         this.context.font = (20) + 'px NVNPixelFJVerdana8pt';
 
         tutorial.forEach((t, i) => {
-            this.context.fillText(t, this.gameWidth * 0.75 + 20, 100 + i * 30);
+            this.context.fillText(t.split(":")[0] + ":", this.gameWidth * 0.75 + 20, 100 + i * 30);
+            this.context.fillText(t.split(":")[1], this.gameWidth * 0.75 + 80, 100 + i * 30);
         });
     }
 
@@ -293,6 +401,7 @@ class Create {
         this.drawScreen();
         this.drawItem();
         this.drawText();
+        this.drawSolid();
     }
 
     drawFPS() {
@@ -305,6 +414,19 @@ class Create {
         this.context.fillText("FPS: " + fps, 50, 50);
     }
 
+    drawSolid() {
+        if (this.isP) {
+            this.context.drawImage(image, this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, this.sizeBlock / 2);
+        }
+        if (this.isQ) {
+            this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, "cyan");
+        }
+        if (this.isS) {
+            // vẽ viền trắng
+            this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4 - 5, this.gameHeight - this.sizeBlock - 5, this.sizeBlock / 2 + 10, "white");
+            this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, "black");
+        }
+    }
 
     clearScreen() {
         this.context.clearRect(0, 0, this.gameWidth, this.gameHeight);
