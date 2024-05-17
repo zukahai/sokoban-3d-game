@@ -88,6 +88,7 @@ class Create {
         this.isP = false;
         this.isQ = false;
         this.isS = false;
+        this.isK = false;
     }
 
     addRowBottom() {
@@ -165,6 +166,10 @@ class Create {
             this.solveS(row, col);
             return;
         }
+        if (this.isK) {
+            this.solveK(row, col);
+            return;
+        }
 
         console.log(row, col);
         let value = this.data.data[row][col];
@@ -224,6 +229,12 @@ class Create {
         }
     }
 
+    solveK(row, col) {
+        this.data.end.x = col;
+        this.data.end.y = row;
+        this.isK = false;
+    }
+
     listenKeyboard() {
         document.addEventListener("keydown", evt => {
             switch (evt.keyCode) {
@@ -266,6 +277,10 @@ class Create {
                 //h
                 case 72:
                     this.saveFile();
+                    break;
+                    //k
+                case 75:
+                    this.isK = !this.isK;
                     break;
 
             }
@@ -357,6 +372,7 @@ class Create {
             "Q: Đặt, huỷ khối leo",
             "B: Đặt,huỷ công tắc thường",
             "M: Đặt, huỷ công tắc giữ",
+            "K: Thay đổi điểm kết thúc",
             "H: Lưu file với dữ liệu và data",
         ];
 
@@ -365,8 +381,8 @@ class Create {
         this.context.font = (20) + 'px NVNPixelFJVerdana8pt';
 
         tutorial.forEach((t, i) => {
-            this.context.fillText(t.split(":")[0] + ":", this.gameWidth * 0.75 + 20, 100 + i * 30);
-            this.context.fillText(t.split(":")[1], this.gameWidth * 0.75 + 80, 100 + i * 30);
+            this.context.fillText(t.split(":")[0] + ":", this.gameWidth * 0.75 + 20, 40 + i * 30);
+            this.context.fillText(t.split(":")[1], this.gameWidth * 0.75 + 80, 40 + i * 30);
         });
     }
 
@@ -431,6 +447,9 @@ class Create {
             // vẽ viền trắng
             this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4 - 5, this.gameHeight - this.sizeBlock - 5, this.sizeBlock / 2 + 10, "white");
             this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, "black");
+        }
+        if (this.isK) {
+            this.drawCircle(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - this.sizeBlock / 2, this.sizeBlock / 4);
         }
     }
 
