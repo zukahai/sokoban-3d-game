@@ -1,33 +1,83 @@
 var indexLevel = 18;
-// Level data
 levels[indexLevel] = {
-    starts: [
-        { x: 0, y: 0 },
+  starts: [
+    {
+      x: 1,
+      y: 6
+    }
+  ],
+  end: {
+    "x": 6,
+    "y": 1
+  },
+  data: [
+    "00002222",
+    "22222212",
+    "21112222",
+    "21212222",
+    "21111121",
+    "21121121",
+    "21111121",
+    "22222221"
+  ],
+  objects: [
+    [
+      1,
+      5
     ],
-    end: { x: 3, y: 1 },
-    data: [
-        "1111",
-        "1111",
-        "1111",
+    [
+      3,
+      4
     ],
-    objects: [
-        [2, 1]
-    ],
-    triggers: [
-        { 
-            x: 1, 
-            y: 1, 
-            type: 2, 
-            on: [
-                [1, 1, 1, 2]
-            ] 
-        },
-    ],
+    [
+      4,
+      5
+    ]
+  ],
+  triggers: [
+    {
+      "x": 1,
+      "y": 4,
+      "type": 2,
+      "on": [
+        [
+          5,
+          3,
+          2,
+          1,
+          -1
+        ]
+      ]
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": 2,
+      "on": [
+        [
+          5,
+          2,
+          2,
+          1,
+          -1
+        ]
+      ]
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "type": 2,
+      "on": [
+        [
+          5,
+          1,
+          2,
+          1,
+          -1
+        ]
+      ]
+    }
+  ],
+  width: 8,
+  height: 8
 }
-
-levels[indexLevel].width = levels[indexLevel].data[0].length;
-levels[indexLevel].height = levels[indexLevel].data.length;
-
-// Tutorial
-tuto[indexLevel] = [
-]

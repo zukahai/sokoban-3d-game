@@ -51,7 +51,7 @@ class Create {
     reset() {
         this.data = {
             starts: [
-                { x: 0, y: 0 },
+                { x: 1, y: 1 },
             ],
             end: { x: 4, y: 2 },
             data: [
