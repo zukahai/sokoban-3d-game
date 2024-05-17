@@ -95,6 +95,15 @@ class Create {
         this.isM = 0;
     }
 
+    resetKey() {
+        this.isP = false;
+        this.isQ = false;
+        this.isS = false;
+        this.isK = false;
+        this.isB = 0;
+        this.isM = 0;
+    }
+
     addRowBottom() {
         this.data.data.push("1".repeat(this.width));
         this.height++;
@@ -308,6 +317,7 @@ class Create {
         } else {
             this.data.starts.push({ x: x, y: y });
         }
+        this.isS = false;
     }
 
     solveZ() {
@@ -352,15 +362,21 @@ class Create {
                     break;
                 //p
                 case 80:
-                    this.isP = !this.isP;
+                    let old = this.isP;
+                    this.resetKey();
+                    this.isP = !old;
                     break;
                 //q
                 case 81:
-                    this.isQ = !this.isQ;
+                    let oldQ = this.isQ;
+                    this.resetKey();
+                    this.isQ = !oldQ;
                     break;
                 //s
                 case 83:
-                    this.isS = !this.isS;
+                    let oldS = this.isS;
+                    this.resetKey();
+                    this.isS = !oldS;
                     break;
                 //h
                 case 72:
@@ -368,11 +384,15 @@ class Create {
                     break;
                 //k
                 case 75:
-                    this.isK = !this.isK;
+                    let oldK = this.isK;
+                    this.resetKey();
+                    this.isK = !oldK;
                     break;
                 //b
                 case 66:
-                    this.isB = (this.isB > 0) ? 0 : 1;
+                    let oldB = this.isB;
+                    this.resetKey();
+                    this.isB = (oldB > 0) ? 0 : 1;
                     break;
                 //z
                 case 90:
@@ -380,7 +400,9 @@ class Create {
                     break;
                 //m
                 case 77:
-                    this.isM = (this.isM > 0) ? 0 : 1;
+                    let oldM = this.isM;
+                    this.resetKey();
+                    this.isM = (oldM > 0) ? 0 : 1;
                     break;
 
             }
