@@ -24,14 +24,19 @@ class Create {
     }
 
     saveFile() {
-        const jsonData = JSON.stringify(this.data, null, 2);
+        let atributes = ["starts", "end", "data", "objects", "triggers", "width", "height", "x", "y"];
+        let jsonData = JSON.stringify(this.data, null, 2);
+        atributes.forEach(atr => {
+            jsonData = jsonData.replace(`"${atr}"`, atr);
+        });
+        jsonData = "var indexLevel = 100;\nlevels[indexLevel] = " + jsonData;
 
         const blob = new Blob([jsonData], { type: "application/json" });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = "data.json";
+        a.download = "data.txt";
         a.style.display = "none";
         document.body.appendChild(a);
         a.click();
@@ -200,6 +205,7 @@ class Create {
         } else {
             this.data.objects.push([x, y, 2]);
         }
+        this.isQ = false;
     }
 
     solveS(row, col) {
@@ -326,7 +332,7 @@ class Create {
 
     drawText() {
         // danh sách màu đỏ đậm dần
-        let colors = ["", "#f5eeed", "#f5b9b5", "#f77c74", "#f77c74", "#f71607", "#f71607", "#f71607", "#f71607"]
+        let colors = ["", "#f5eeed", "#f77c74", "#f77c74", "#f71607", "#f71607", "#f71607", "#f71607"]
         this.context.font = this.sizeBlock / 2 + 'px NVNPixelFJVerdana8pt';
         this.xA = 0;
         this.yA = 0;
