@@ -5,6 +5,7 @@ class Create {
     constructor() {
         this.canvas = null;
         this.context = null;
+        this.reset();
         if (localStorage.getItem("test") != null) {
             this.data = JSON.parse(localStorage.getItem("test"));
             this.width = this.data.width;
@@ -67,9 +68,9 @@ class Create {
                 // {
                 //     x: 1,
                 //     y: 1,
-                //     type: 2,
+                //     type: 1,
                 //     on: [
-                //         [2, 3, 1, 2]
+                //         [2, 3, 1, 2, 0, 1]
                 //     ]
                 // },
                 // {
@@ -89,6 +90,9 @@ class Create {
         this.isQ = false;
         this.isS = false;
         this.isK = false;
+        this.isB = 0;
+        this.vct = 1;
+        this.isM = 0;
     }
 
     addRowBottom() {
@@ -147,7 +151,6 @@ class Create {
         this.context = this.canvas.getContext("2d");
         document.body.appendChild(this.canvas);
         this.start();
-
     }
 
     solveMouse(x, y) {
@@ -171,11 +174,89 @@ class Create {
             return;
         }
 
+        if (this.isB > 0) {
+            this.solveB(row, col);
+            return;
+        }
+
+        if (this.isM > 0) {
+            this.solveM(row, col);
+            return;
+        }
+
         console.log(row, col);
         let value = this.data.data[row][col];
         value = Math.floor(value) + 1;
         value = value % 10;
         this.data.data[row] = this.data.data[row].substring(0, col) + value + this.data.data[row].substring(col + 1);
+        this.refreshTrigger();
+    }
+
+    solveB(row, col) {
+        let x = col;
+        let y = row;
+        if (this.isB == 1) {
+            let index = -1;
+            this.data.triggers.forEach((trigger, i) => {
+                if (trigger.x == x && trigger.y == y) {
+                    index = i;
+                }
+            });
+            if (index != -1) {
+                console.log("innn");
+                this.data.triggers.splice(index, 1);
+                this.isB = 0;
+            } else {
+                // this.data.triggers.push({ x: x, y: y, type: 1, on: [] });
+                this.xTrigger = x;
+                this.yTrigger = y;
+                console.log(this.xTrigger, this.yTrigger);
+                this.isB = 2;
+            }
+        } else {
+            this.data.triggers.push({ x: this.xTrigger, y: this.yTrigger, type: 1, on: [[x, y, 0, 0, this.vct]] });
+            this.isB = 0;
+            this.refreshTrigger();
+        }
+    }
+
+    solveM(row, col) {
+        let x = col;
+        let y = row;
+        if (this.isM == 1) {
+            let index = -1;
+            this.data.triggers.forEach((trigger, i) => {
+                if (trigger.x == x && trigger.y == y) {
+                    index = i;
+                }
+            });
+            if (index != -1) {
+                console.log("innn");
+                this.data.triggers.splice(index, 1);
+                this.isM = 0;
+            } else {
+                // this.data.triggers.push({ x: x, y: y, type: 1, on: [] });
+                this.xTrigger = x;
+                this.yTrigger = y;
+                console.log(this.xTrigger, this.yTrigger);
+                this.isM = 2;
+            }
+        } else {
+            this.data.triggers.push({ x: this.xTrigger, y: this.yTrigger, type: 2, on: [[x, y, 0, 0, this.vct]] });
+            this.isM = 0;
+            this.refreshTrigger();
+        }
+    }
+
+    refreshTrigger() {
+        this.data.triggers.forEach(trigger => {
+            trigger["on"].forEach(on => {
+                console.log(on[1], on[0], on);
+                let value = Math.floor(this.data.data[on[1]][on[0]]);
+                on[2] = value;
+                on[3] = value + on[4];
+            });
+        });
     }
 
     solveP(row, col) {
@@ -229,6 +310,13 @@ class Create {
         }
     }
 
+    solveZ() {
+        this.vct ++;
+        if (this.vct > 5) {
+            this.vct = -5;
+        }
+    }
+
     solveK(row, col) {
         this.data.end.x = col;
         this.data.end.y = row;
@@ -278,9 +366,21 @@ class Create {
                 case 72:
                     this.saveFile();
                     break;
-                    //k
+                //k
                 case 75:
                     this.isK = !this.isK;
+                    break;
+                //b
+                case 66:
+                    this.isB = (this.isB > 0) ? 0 : 1;
+                    break;
+                //z
+                case 90:
+                    this.solveZ();
+                    break;
+                //m
+                case 77:
+                    this.isM = (this.isM > 0) ? 0 : 1;
                     break;
 
             }
@@ -450,6 +550,30 @@ class Create {
         }
         if (this.isK) {
             this.drawCircle(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - this.sizeBlock / 2, this.sizeBlock / 4);
+        }
+
+        if (this.isB > 0) {
+            this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, "blue");
+            this.context.textAlign = "center";
+            this.context.fillStyle = "#ffffff";
+            if (this.isB == 2) {
+                this.context.fillText("Chọn vị trí ảnh hưởng", this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - 25);
+            } else {
+                this.context.fillText(this.vct, this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - this.sizeBlock / 1.5);
+                this.context.fillText("Bấm Z để chọn độ cao", this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - 25);
+            }
+        }
+
+        if (this.isM > 0) {
+            this.drawSquare(this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2 - this.sizeBlock / 4, this.gameHeight - this.sizeBlock, this.sizeBlock / 2, "green");
+            this.context.textAlign = "center";
+            this.context.fillStyle = "#ffffff";
+            if (this.isM == 2) {
+                this.context.fillText("Chọn vị trí ảnh hưởng", this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - 25);
+            } else {
+                this.context.fillText(this.vct, this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - this.sizeBlock / 1.5);
+                this.context.fillText("Bấm Z để chọn độ cao", this.gameWidth * 0.75 + this.gameWidth * 0.25 / 2, this.gameHeight - 25);
+            }
         }
     }
 
