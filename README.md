@@ -10,3 +10,13 @@ https://github.com/zukahai/sokoban-3d/assets/85035951/bc061f7f-dc4e-4c92-b09d-c8
 ## Installation
 
 Chơi trực tiếp tại [đây](https://sokoban-3d.vercel.app/)
+
+## Contributor
+
+### Tạo 1 màn chơi mới của riêng bạn
+
+Try cập: https://sokoban-3d.vercel.app/create/
+
+<p style="center"><img src = "./assets/images/create1.png"></p>
+
+#### Các phím tắt
