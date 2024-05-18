@@ -489,12 +489,12 @@ class Create {
             "→: Thêm cột phải",
             "Enter: Lưu và chơi thử",
             "Click: Thay đổi giá trị (0→9)",
-            "S: Thêm điểm xuất phát",
             "P: Đặt, huỷ khối thường",
             "Q: Đặt, huỷ khối leo",
-            "B: Đặt,huỷ công tắc thường",
-            "M: Đặt, huỷ công tắc giữ",
+            "S: Thêm điểm xuất phát",
             "K: Thay đổi điểm kết thúc",
+            "B: Đặt, huỷ công tắc thường",
+            "M: Đặt, huỷ công tắc giữ",
             "H: Lưu file với dữ liệu và data",
         ];
 
