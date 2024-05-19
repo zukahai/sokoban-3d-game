@@ -129,6 +129,8 @@ Cuối cùng là bước tạo Pull Request:<br>Truy cập: https://github.com/z
 
 <p style="center"><img src = "./assets/images/contribute8.png"></p>
 
+Tại giao diện này các bạn thả 1 sao để cho nhiều người biết đến trò chơi hơn nha. Tiếp theo:
+
 Chọn `Compare & pull request`
 
 <p style="center"><img src = "./assets/images/contribute9.png"></p>
