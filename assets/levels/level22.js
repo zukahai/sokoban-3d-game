@@ -50,8 +50,8 @@ levels[indexLevel] = {
         [
           1,
           7,
-          3,
           2,
+          1,
           1
         ]
       ]
@@ -64,8 +64,8 @@ levels[indexLevel] = {
         [
           1,
           6,
-          3,
           2,
+          1,
           1
         ]
       ]
@@ -78,8 +78,8 @@ levels[indexLevel] = {
         [
           1,
           5,
-          3,
           2,
+          1,
           1
         ]
       ]
@@ -92,8 +92,8 @@ levels[indexLevel] = {
         [
           1,
           4,
-          3,
           2,
+          1,
           1
         ]
       ]
