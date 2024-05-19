@@ -82,3 +82,58 @@ Chọn ô đặt công tắc, sau đó tiếp tục chọn ô mà công tắc s�
 #### 9. Thêm công tắc giữ
 
 Bấm phím `M` rồi làm tương tự như công tắc thường.
+
+## Cách thêm màn chơi của bạn vào trò chơi
+
+Có thể nhắn tin trực tiếp qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/) và gửi file `data.txt` cho mình.
+
+Nếu bạn có tài khoản github, bạn có thể tự thêm màn chơi của bạn vào trò chơi bằng cách thực hiện các bước sau:
+
+Tại https://sokoban-3d.vercel.app/create/
+
+Bấm `H` để tại về 1 file có tên `data.txt`. Copy nội dung file này và làm tiếp theo hướng dẫn.
+
+Truy cập: https://github.dev/zukahai/sokoban-3d-game
+
+Chờ đợt trang web load xong, sẽ hiện ra như hình dưới đây:
+
+<p style="center"><img src = "./assets/images/contribute1.png"></p>
+
+Chọn `config.js`, bên trong đang lưu số lượng màn chơi hiện tại, bạn cần tăng nó lên 1, Ví dụ hiện tại đang có 21 màn chơi thì bạn cần sửa thành 22.
+
+<p style="center"><img src = "./assets/images/contribute2.png"></p>
+
+Tiếp tục chọn `assets` đợi nó load một lát xong chọn tiếp phần `levels`, cửa số lúc này sẽ hiện ra như hình dưới đây:
+
+<p style="center"><img src = "./assets/images/contribute3.png"></p>
+
+Bấm vào icon như hình dưới để tạo 1 file mới với tên là `levelX.json` trong đó `X` là số thứ tự màn chơi của bạn. Ví dụ bạn muốn tạo màn chơi thứ 22 thì bạn cần tạo file `level22.json`.
+*Lưu ý: Hệ thống github.dev load liên tục nên đôi khi sẽ không nhận được tín hiệu tạo file của bạn, cần kiên nhẫn thực hiện thao tác này nhiều lần nếu không thấy hệ thông yêu cầu nhập tên file*
+
+Sau đó dán nội dung file `data.txt` vào file `levelX.json` vừa tạo, Nhớ sửa lại phần `indexLevel` thành `X` trong file `levelX.json`. Ví dụ bạn đang tạo màn chơi thứ 22 thì bạn cần sửa thành `var indexLevel = 22;`.
+
+<p style="center"><img src = "./assets/images/contribute5.png"></p>
+
+- Chuyển qua tag source control, bằng cách chọn biểu tượng 1 như hình dưới
+- Viết 1 đoạn thông điệp cho mình biết bạn muốn làm gì, ví dụ `add level 22`
+- Bấm nút `Commit and push`
+
+<p style="center"><img src = "./assets/images/contribute6.png"></p>
+
+Nếu có thông báo hiện ra, chọn `fork repository` để tạo 1 bản sao của trò chơi trên github của bạn.
+
+<p style="center"><img src = "./assets/images/contribute7.png"></p>
+Nếu giao diện tiếp theo như vậy, bạn chỉ việc chọn vào `patch-1` bấm phím `Enter` để tạo Pull Request.
+
+Cuối cùng là bước tạo Pull Request:<br>Truy cập: https://github.com/zukahai/sokoban-3d-game
+
+<p style="center"><img src = "./assets/images/contribute8.png"></p>
+
+Chọn `Compare & pull request`
+
+<p style="center"><img src = "./assets/images/contribute9.png"></p>
+
+Cuối cùng chọn `Create pull request` và chờ đợi phản hồi từ mình.
+
+#### Nếu bạn bị mắc lỗi ở đâu đấy hoặc cảm chưa làm được có thể lên hệ qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
+
