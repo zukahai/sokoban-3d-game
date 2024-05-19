@@ -570,6 +570,8 @@ drawHUD = () => {
         ctx.fillText("Số bước: " + nbMoves, 20, 50);
         ctx.fillText("M - Tắt âm thanh", 20, 90);
         ctx.fillText("R - Chơi lại", 20, 130);
+        ctx.fillText("N - Mà tiếp theo", 20, 170);
+        ctx.fillText("P - Mà trước đó", 20, 210);
 
         ctx.textAlign = "center";
         ctx.font = 30 + 'px MyCustomFont';
@@ -1638,12 +1640,16 @@ document.onkeydown = (e) => {
         case 17:
         case 32:
             break;
-        // // p
-        // case 80:
-        //     nextLevel();
-        //     gameOver();
-        //     timeOutTuto ? clearTimeout(timeOutTuto) : null;
-        //     break;
+        // n
+        case 78:
+            //load page
+            window.location.href = "../" + "?level=" + (gameLevel + 1);
+            break;
+        // p
+        case 80:
+            window.location.href = "../" + "?level=" + (gameLevel - 1);
+            break;
+
     }
 }
 document.onkeyup = (e) => {

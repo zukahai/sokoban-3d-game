@@ -9,7 +9,7 @@ https://github.com/zukahai/sokoban-3d/assets/85035951/bc061f7f-dc4e-4c92-b09d-c8
 
 ## Installation
 
-Chơi trực tiếp tại [đây](https://sokoban-3d.vercel.app/)
+Chơi trực tiếp [Tại đây](https://sokoban-3d.vercel.app/)
 
 ## Contributor
 
@@ -136,4 +136,14 @@ Chọn `Compare & pull request`
 Cuối cùng chọn `Create pull request` và chờ đợi phản hồi từ mình.
 
 #### Nếu bạn bị mắc lỗi ở đâu đấy hoặc cảm chưa làm được có thể lên hệ qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
+
+## Người đóng góp
+
+Cảm ơn các bạn đã đóng góp vào trò chơi này:
+
+<center>
+<a href="https://github.com/zukahai/sokoban-3d-game/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zukahai/sokoban-3d-game" />
+</a>
+</center>
 
