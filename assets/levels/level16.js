@@ -1,4 +1,6 @@
-levels[++indexLevel] = {
+var indexLevel = 16;
+// Level data
+levels[indexLevel] = {
     width: 16,
     height: 16,
     starts: [{ x: 8, y: 7 }],

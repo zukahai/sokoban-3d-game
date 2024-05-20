@@ -1,4 +1,5 @@
-levels[++indexLevel] = {
+var indexLevel = 22;
+levels[indexLevel] = {
   starts: [
     {
       x: 10,
