@@ -1,4 +1,5 @@
 isWin = false;
+isShowText = true;
 
 getParameter = (paramName) => {
     // Lấy URL hiện tại của trình duyệt
@@ -564,6 +565,8 @@ drawHUD = () => {
         ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
     }
     else if (!isWin) {
+        if (!isShowText)
+            return;
         ctx.textAlign = "left";
         ctx.font = 20 + 'px MyCustomFont';
         ctx.fillStyle = "#ffffff";
@@ -572,6 +575,10 @@ drawHUD = () => {
         ctx.fillText("R - Chơi lại", 20, 130);
         ctx.fillText("N - Mà tiếp theo", 20, 170);
         ctx.fillText("P - Mà trước đó", 20, 210);
+        ctx.fillStyle = "cyan";
+        ctx.fillText("H - Tạo màn chơi của riêng bạn", 20, 250);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText("K - Ẩn chữ", 20, 290);
 
         ctx.textAlign = "center";
         ctx.font = 30 + 'px MyCustomFont';
@@ -1648,6 +1655,14 @@ document.onkeydown = (e) => {
         // p
         case 80:
             window.location.href = "../" + "?level=" + (gameLevel - 1);
+            break;
+        // h
+        case 72:
+            window.open("https://github.com/zukahai/sokoban-3d-game?tab=readme-ov-file#contributor", "_blank");
+            break;
+        // k
+        case 75:
+            isShowText = !isShowText;
             break;
 
     }
