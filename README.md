@@ -110,7 +110,7 @@ Tiếp tục chọn `assets` đợi nó load một lát xong chọn tiếp phầ
 Bấm vào icon như hình dưới để tạo 1 file mới với tên là `levelX.json` trong đó `X` là số thứ tự màn chơi của bạn. Ví dụ bạn muốn tạo màn chơi thứ 22 thì bạn cần tạo file `level22.json`.
 *Lưu ý: Hệ thống github.dev load liên tục nên đôi khi sẽ không nhận được tín hiệu tạo file của bạn, cần kiên nhẫn thực hiện thao tác này nhiều lần nếu không thấy hệ thông yêu cầu nhập tên file*
 
-Sau đó dán nội dung file `data.txt` vào file `levelX.json` vừa tạo, Nhớ sửa lại phần `indexLevel` thành `X` trong file `levelX.json`. Ví dụ bạn đang tạo màn chơi thứ 22 thì bạn cần sửa thành `var indexLevel = 22;`.
+Sau đó dán nội dung file `data.txt` vào file `levelX.json` vừa tạo
 
 <p style="center"><img src = "./assets/images/contribute5.png"></p>
 
