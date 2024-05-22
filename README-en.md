@@ -4,7 +4,7 @@ Choose language: [Vietnamese](./README.md) | [English](./README-en.md)
 
 ## Description
 
-![Sokoban 3D](https://github.com/zukahai/sokoban-3d/assets/85035951/bc061f7f-dc4e-4c92-b09d-c8b09f2b0672)
+https://github.com/zukahai/sokoban-3d/assets/85035951/bc061f7f-dc4e-4c92-b09d-c8b09f2b0672
 
 This is a puzzle game where your task is to move the black cube to the position of the ball. To move the cube, simply press the arrow keys on the keyboard. The game features various puzzle elements such as secret rooms, stairs, doors, keys, etc. You need to find a way to overcome these obstacles to reach the position of the ball.
 
