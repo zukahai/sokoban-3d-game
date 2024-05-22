@@ -1,6 +1,6 @@
 # SOKOBAN 3D GAME
 
-Choose language: [Vietnamese](./README.md) | [English](./README-en.md)
+Choose language: [Vietnamese](./README-vi.md) | [English](./README-en.md)
 
 ## Description
 

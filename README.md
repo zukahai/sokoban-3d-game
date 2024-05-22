@@ -1,141 +1,138 @@
-# TRÒ CHƠI  SOKOBAN 3D
+# SOKOBAN 3D GAME
 
-Chọn ngôn ngữ: [Tiếng Việt](./README.md) | [English](./README-en.md)
+Choose language: [Vietnamese](./README-vi.md) | [English](./README-en.md)
 
-## Mô tả
+## Description
 
 https://github.com/zukahai/sokoban-3d/assets/85035951/bc061f7f-dc4e-4c92-b09d-c8b09f2b0672
 
-Đây là trò chơi đẩy thùng, nhiệm vụ của bạn là di chuyển khối lập phương màu đen để tìm tới vị trí của quả cầu,
-để di chuyển khối lập phương bạn chỉ cần nhấn vào các phím mũi tên trên bàn phím. Trò chơi có nhiều biến thể các khối lập phương công như có một số cơ quan mật thất, cầu thang, cửa, chìa khóa, v.v. Bạn cần phải tìm ra cách để vượt qua các chướng ngại vật này để tìm ra vị trí của quả cầu.
+This is a puzzle game where your task is to move the black cube to the position of the ball. To move the cube, simply press the arrow keys on the keyboard. The game features various puzzle elements such as secret rooms, stairs, doors, keys, etc. You need to find a way to overcome these obstacles to reach the position of the ball.
 
-## Cài đặt
+## Installation
 
-Chơi trực tiếp tại [đây](https://sokoban-3d.vercel.app/)
+Play directly [here](https://sokoban-3d.vercel.app/)
 
-## Đóng góp màn chơi
+## Contribute a Level
 
-### Tạo 1 màn chơi mới của riêng bạn
+### Create Your Own Level
 
-Try cập: https://sokoban-3d.vercel.app/create/
+Access: https://sokoban-3d.vercel.app/create/
 
-<p style="center"><img src = "./assets/images/create1.png"></p>
+Table of Contents:
 
-Mục Lục:
+1. [Preview Your Level](#1-preview-your-level)
+2. [Change Block Heights](#2-change-block-heights)
+3. [Add Rows and Columns](#3-add-rows-and-columns)
+4. [Add Starting Point](#4-add-starting-point)
+5. [Change Ending Point](#5-change-ending-point)
+6. [Add Regular Cubes](#6-add-regular-cubes)
+7. [Add Climbing Cubes](#7-add-climbing-cubes)
+8. [Add Regular Switches](#8-add-regular-switches)
+9. [Add Hold Switches](#9-add-hold-switches)
 
-1. [Xem thử màn chơi của bạn](#1-xem-thử-màn-chơi-của-bạn)
-2. [Thay đổi độ cao các khối](#2-thay-đổi-độ-cao-các-khối)
-3. [Thêm hàng, cột](#3-thêm-hàng-cột)
-4. [Thêm điểm xuất phát](#4-thêm-điểm-xuất-phát)
-5. [Thay đổi điểm kết thúc](#5-thay-đổi-điểm-kết-thúc)
-6. [Thêm các khối lập phương thường](#6-thêm-các-khối-lập-phương-thường)
-7. [Thêm các khối lập phương có thể leo](#7-thêm-các-khối-lập-phương-có-thể-leo)
-8. [Thêm công tắc thường](#8-thêm-công-tắc-thường)
-9. [Thêm công tắc giữ](#9-thêm-công-tắc-giữ)
+#### 1. Preview Your Level
+Press `Enter` to preview your level:
 
-#### 1. Xem thử màn chơi của bạn
-Bấm `Enter` để xem thử màn chơi của bạn:
+For example, with the image below:
 
-Ví dụ như với hình dưới đây:
+![Create Level 1](./assets/images/create1.png)
 
-<p style="center"><img src = "./assets/images/create1.png"></p>
+After pressing `Enter`, the level will be displayed as follows:
 
-Thì sau khi bấm `Enter` sẽ hiện ra màn chơi như sau:
+![Create Level 2](./assets/images/create2.png)
 
-<p style="center"><img src = "./assets/images/create2.png"></p>
+#### 2. Change Block Heights
 
-#### 2. Thay đổi độ cao các khối
+Change the block heights by clicking on the cells. The values will range from 0 to 9, representing the heights of the blocks.
 
-Thay đổi độ cao các khối bằng các bấm vào các ô, các giá trị sẽ thay đổi từ 0 đến 9, chính là độ cao của các khối.
+#### 3. Add Rows and Columns
 
-#### 3. Thêm hàng, cột
+- Press ↑ to add a row above
+- Press ↓ to add a row below
+- Press ← to add a column on the left
+- Press → to add a column on the right
 
-- Bấm ↑ để thêm hàng phía trên
-- Bấm ↓ để thêm hàng phía dưới
-- Bấm ← để thêm cột bên trái
-- Bấm → để thêm cột bên phải.
+#### 4. Add Starting Point
 
-#### 4. Thêm điểm xuất phát.
+Press `S` and select the cell where you want to place the starting point.
 
-Bấm phím `S` rồi chọn ô mà bạn muốn làm điểm xuất phát.
+#### 5. Change Ending Point
 
-#### 5. Thay đổi điểm kết thúc.
+Press `K` and select the cell where you want to place the ending point.
 
-Bấm phím `K` rồi chọn ô mà bạn muốn làm điểm kết thúc.
+#### 6. Add Regular Cubes
 
-#### 6. Thêm các khối lập phương thường.
+Press `P` and select the cell where you want to place a regular cube.
 
-Bấm phím `P` rồi chọn ô mà bạn muốn làm khối lập phương.
+#### 7. Add Climbing Cubes
 
-#### 7. Thêm các khối lập phương có thể leo
+Press `Q` and select the cell where you want to place a climbing cube.
 
-Bấm phím `Q` rồi chọn ô mà bạn muốn làm khối lập phương có thể leo.
+#### 8. Add Regular Switches
 
-#### 8. Thêm công tắc thường
+Press `B` to display the following:
 
-Bấm phím `B` để hiện như hình bên dưới
+![Add Regular Switch](./assets/images/create3.png)
 
-<p style="center"><img src = "./assets/images/create3.png"></p>
+Click on the green cell to change the depth when the switch is activated. The number 1 means that the designated cell will decrease its depth by 1 when the switch is pressed. The number -1 means that the designated cell will decrease its depth by 1 when the switch is pressed.
 
-Click và ô màu xanh để thay đổi độ sâu khi mà công tắc kích hoạt. Số 1 có nghĩa là khi bấm vào công tắc thì ô chỉ định sẽ giảm 1 độ sâu. Số -1 có nghĩa là khi bấm vào công tắc thì ô chỉ định sẽ giảm 1 độ sâu.
+Select the cell to place the switch, then select the cell that the switch will activate.
 
-Chọn ô đặt công tắc, sau đó tiếp tục chọn ô mà công tắc sẽ kích hoạt
+#### 9. Add Hold Switches
 
-#### 9. Thêm công tắc giữ
+Press `M` and follow the same steps as regular switches.
 
-Bấm phím `M` rồi làm tương tự như công tắc thường.
+## How to Add Your Level to the Game
 
-## Cách thêm màn chơi của bạn vào trò chơi
+You can send me a direct message on Facebook: [Phan Đức Hải](https://www.facebook.com/chiatayde/) and send me the `data.txt` file.
 
-Có thể nhắn tin trực tiếp qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/) và gửi file `data.txt` cho mình.
+If you have a GitHub account, you can add your level to the game by following these steps:
 
-Nếu bạn có tài khoản github, bạn có thể tự thêm màn chơi của bạn vào trò chơi bằng cách thực hiện các bước sau:
+Go to https://sokoban-3d.vercel.app/create/
 
-Tại https://sokoban-3d.vercel.app/create/
+Press `H` to create a file named `data.txt`. Copy the content of this file and follow the instructions.
 
-Bấm `H` để tại về 1 file có tên `data.txt`. Copy nội dung file này và làm tiếp theo hướng dẫn.
+Access: https://github.dev/zukahai/sokoban-3d-game
 
-Truy cập: https://github.dev/zukahai/sokoban-3d-game
+Wait for the web page to load, it will appear as shown below:
 
-Chờ đợt trang web load xong, sẽ hiện ra như hình dưới đây:
+![Contribute Step 1](./assets/images/contribute1.png)
 
-<p style="center"><img src = "./assets/images/contribute1.png"></p>
+Select `config.js`, inside it is the current number of levels. You need to increase it by 1. For example, if there are currently 21 levels, you need to change it to 22.
 
-Chọn `config.js`, bên trong đang lưu số lượng màn chơi hiện tại, bạn cần tăng nó lên 1, Ví dụ hiện tại đang có 21 màn chơi thì bạn cần sửa thành 22.
+![Contribute Step 2](./assets/images/contribute2.png)
 
-<p style="center"><img src = "./assets/images/contribute2.png"></p>
+Continue to select `assets`, wait for it to load, then select `levels`. The window will appear as shown below:
 
-Tiếp tục chọn `assets` đợi nó load một lát xong chọn tiếp phần `levels`, cửa số lúc này sẽ hiện ra như hình dưới đây:
+![Contribute Step 3](./assets/images/contribute3.png)
 
-<p style="center"><img src = "./assets/images/contribute3.png"></p>
+Click on the icon as shown below to create a new file named `levelX.json`, where `X` is the number of your level. For example, if you want to create level 22, you need to create the file `level22.json`.
+*Note: The GitHub.dev system loads continuously, so sometimes it may not receive the signal to create the file. You need to be patient and perform this operation multiple times if you don't see the system asking for the file name.*
 
-Bấm vào icon như hình dưới để tạo 1 file mới với tên là `levelX.json` trong đó `X` là số thứ tự màn chơi của bạn. Ví dụ bạn muốn tạo màn chơi thứ 22 thì bạn cần tạo file `level22.json`.
-*Lưu ý: Hệ thống github.dev load liên tục nên đôi khi sẽ không nhận được tín hiệu tạo file của bạn, cần kiên nhẫn thực hiện thao tác này nhiều lần nếu không thấy hệ thông yêu cầu nhập tên file*
+Then paste the content of the `data.txt` file into the newly created `levelX.json` file. Remember to change the `indexLevel` part to `X` in the `levelX.json` file. For example, if you are creating level 22, you need to change it to `var indexLevel = 22;`.
 
-Sau đó dán nội dung file `data.txt` vào file `levelX.json` vừa tạo, Nhớ sửa lại phần `indexLevel` thành `X` trong file `levelX.json`. Ví dụ bạn đang tạo màn chơi thứ 22 thì bạn cần sửa thành `var indexLevel = 22;`.
+![Contribute Step 5](./assets/images/contribute5.png)
 
-<p style="center"><img src = "./assets/images/contribute5.png"></p>
+- Switch to the source control tab by selecting the icon as shown below
+- Write a message to let me know what you want to do, for example, `add level 22`
+- Press the `Commit and push` button
 
-- Chuyển qua tag source control, bằng cách chọn biểu tượng 1 như hình dưới
-- Viết 1 đoạn thông điệp cho mình biết bạn muốn làm gì, ví dụ `add level 22`
-- Bấm nút `Commit and push`
+![Contribute Step 6](./assets/images/contribute6.png)
 
-<p style="center"><img src = "./assets/images/contribute6.png"></p>
+If there is a prompt, select `fork repository` to create a copy of the game on your GitHub.
 
-Nếu có thông báo hiện ra, chọn `fork repository` để tạo 1 bản sao của trò chơi trên github của bạn.
+![Contribute Step 7](./assets/images/contribute7.png)
 
-<p style="center"><img src = "./assets/images/contribute7.png"></p>
-Nếu giao diện tiếp theo như vậy, bạn chỉ việc chọn vào `patch-1` bấm phím `Enter` để tạo Pull Request.
+If the next interface appears, simply select `patch-1` and press `Enter` to create a Pull Request.
 
-Cuối cùng là bước tạo Pull Request:<br>Truy cập: https://github.com/zukahai/sokoban-3d-game
+Finally, create a Pull Request:<br>Access: https://github.com/zukahai/sokoban-3d-game
 
-<p style="center"><img src = "./assets/images/contribute8.png"></p>
+![Contribute Step 8](./assets/images/contribute8.png)
 
-Chọn `Compare & pull request`
+Select `Compare & pull request`
 
-<p style="center"><img src = "./assets/images/contribute9.png"></p>
+![Contribute Step 9](./assets/images/contribute9.png)
 
-Cuối cùng chọn `Create pull request` và chờ đợi phản hồi từ mình.
+Finally, select `Create pull request` and wait for a response from me.
 
-#### Nếu bạn bị mắc lỗi ở đâu đấy hoặc cảm chưa làm được có thể lên hệ qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
-
+#### If you encounter any issues or have trouble following the steps, you can contact me on Facebook: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
