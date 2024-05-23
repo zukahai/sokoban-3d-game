@@ -136,3 +136,13 @@ Select `Compare & pull request`
 Finally, select `Create pull request` and wait for a response from me.
 
 #### If you encounter any issues or have trouble following the steps, you can contact me on Facebook: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
+
+## Contributors
+
+Thank you to the following contributors for their contributions to this game:
+
+<center>
+<a href="https://github.com/zukahai/sokoban-3d-game/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=zukahai/sokoban-3d-game" />
+</a>
+</center>

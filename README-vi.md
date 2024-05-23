@@ -139,3 +139,13 @@ Cuối cùng chọn `Create pull request` và chờ đợi phản hồi từ mì
 
 #### Nếu bạn bị mắc lỗi ở đâu đấy hoặc cảm chưa làm được có thể lên hệ qua facebook của mình: [Phan Đức Hải](https://www.facebook.com/chiatayde/)
 
+## Người đóng góp
+
+Cảm ơn những người sau đã đóng góp vào trò chơi này:
+
+<center>
+<a href="https://github.com/zukahai/sokoban-3d-game/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zukahai/sokoban-3d-game" />
+</a>
+</center>
+
