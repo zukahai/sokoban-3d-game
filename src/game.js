@@ -1658,7 +1658,7 @@ document.onkeydown = (e) => {
             break;
         // h
         case 72:
-            window.open("https://github.com/zukahai/sokoban-3d-game?tab=readme-ov-file#contributor", "_blank");
+            window.open("https://github.com/zukahai/sokoban-3d-game/blob/main/README.md#sokoban-3d-game", "_blank");
             break;
         // k
         case 75:
