@@ -565,6 +565,9 @@ drawHUD = () => {
         ctx.fillText(tutoText, window.innerWidth / 2, window.innerHeight / 2 + 256);
     }
     else if (!isWin) {
+        ctx.textAlign = "center";
+        ctx.font = 30 + 'px MyCustomFont';
+        ctx.fillText("Màn chơi " + gameLevel + " / " + NUMBER_OF_LEVEL, canvasHUD.width / 2, 50);
         if (!isShowText)
             return;
         ctx.textAlign = "left";
@@ -580,9 +583,7 @@ drawHUD = () => {
         ctx.fillStyle = "#ffffff";
         ctx.fillText("K - Ẩn chữ", 20, 290);
 
-        ctx.textAlign = "center";
-        ctx.font = 30 + 'px MyCustomFont';
-        ctx.fillText("Màn chơi " + gameLevel, canvasHUD.width / 2, 50);
+
     }
 }
 loop = () => {
@@ -1664,6 +1665,8 @@ document.onkeydown = (e) => {
         case 75:
             isShowText = !isShowText;
             break;
+        default:
+            isShowText = true;
 
     }
 }
