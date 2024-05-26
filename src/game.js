@@ -576,8 +576,8 @@ drawHUD = () => {
         ctx.fillText("Số bước: " + nbMoves, 20, 50);
         ctx.fillText("M - Tắt âm thanh", 20, 90);
         ctx.fillText("R - Chơi lại", 20, 130);
-        ctx.fillText("N - Mà tiếp theo", 20, 170);
-        ctx.fillText("P - Mà trước đó", 20, 210);
+        ctx.fillText("N - Màn tiếp theo", 20, 170);
+        ctx.fillText("P - Màn trước đó", 20, 210);
         ctx.fillStyle = "cyan";
         ctx.fillText("H - Tạo màn chơi của riêng bạn", 20, 250);
         ctx.fillStyle = "#ffffff";
