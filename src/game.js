@@ -40,14 +40,14 @@ function synthesis() {
     var e, t, a, r, o, i, n, l, s, g, d, h;
     this.reset = () => {
         var e = this._p;
-        (r = 100 / (e.f * e.f + 0.001)),
-            (o = 100 / (e.g * e.g + 0.001)),
-            (i = 1 - e.h * e.h * e.h * 0.01),
-            (n = -e.i * e.i * e.i * 1e-6),
-            e.a || ((d = 0.5 - e.n / 2), (h = 5e-5 * -e.o)),
-            (l = 1 + e.l * e.l * (e.l > 0 ? -0.9 : 10)),
-            (s = 0),
-            (g = 1 == e.m ? 0 : (1 - e.m) * (1 - e.m) * 2e4 + 32);
+        r = 100 / (e.f * e.f + 0.001);
+        o = 100 / (e.g * e.g + 0.001);
+        i = 1 - e.h * e.h * e.h * 0.01;
+        n = -e.i * e.i * e.i * 1e-6;
+        e.a || ((d = 0.5 - e.n / 2), (h = 5e-5 * -e.o));
+        l = 1 + e.l * e.l * (e.l > 0 ? -0.9 : 10);
+        s = 0;
+        g = 1 == e.m ? 0 : (1 - e.m) * (1 - e.m) * 2e4 + 32;
     };
     this.totalReset = () => {
         this.reset();
@@ -249,6 +249,7 @@ initShaders = () => {
             (window[r[o][0]] = s);
     initBuffers();
 }
+
 setTextureParams = (e) => {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, e),
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR),
@@ -259,17 +260,20 @@ setTextureParams = (e) => {
         ),
         gl.generateMipmap(gl.TEXTURE_2D);
 }
+
 handleLoadedTexture = (e) => {
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, !0),
-        gl.bindTexture(gl.TEXTURE_2D, e),
-        setTextureParams(e.image);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, !0);
+    gl.bindTexture(gl.TEXTURE_2D, e);
+    setTextureParams(e.image);
 }
+
 handleLoadedTextureFromCanvas = (e, t) => {
-    (texture = gl.createTexture()),
-        gl.bindTexture(gl.TEXTURE_2D, texture),
-        setTextureParams(t),
-        (window[e] = texture);
+    texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    setTextureParams(t);
+    (window[e] = texture);
 }
+
 handleLoadedTextureFromCanvasTiles = (e, t) => {
     (texture = gl.createTexture()),
         gl.bindTexture(gl.TEXTURE_2D, texture),
@@ -277,30 +281,34 @@ handleLoadedTextureFromCanvasTiles = (e, t) => {
         (tilesColors[e] = texture),
         tilesColors.length++;
 }
+
 initTexture = () => {
-    (crate = gl.createTexture()),
-        (crate.image = new Image()),
-        (crate.image.onload = () => {
-            handleLoadedTexture(crate);
-        }),
-        (crate.image.src = "./assets/images/crate.png");
+    crate = gl.createTexture();
+    crate.image = new Image();
+    crate.image.onload = () => {
+        handleLoadedTexture(crate);
+    }
+    crate.image.src = "./assets/images/crate.png";
 }
+
 degToRad = (e) => {
     return (e * Math.PI) / 180;
 }
+
 initBuffers = () => {
-    (cubeVertexIndexBuffer = gl.createBuffer()),
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+    cubeVertexIndexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
     for (var e = [0, 1, 2, 0, 2, 3], t = 6; 36 > t; t++)
         e.push(e[t - 6] + 4);
     gl.bufferData(
         gl.ELEMENT_ARRAY_BUFFER,
         new Uint16Array(e),
         gl.STATIC_DRAW
-    ),
-        (cubeVertexIndexBuffer.itemSize = 1),
-        (cubeVertexIndexBuffer.numItems = e.length);
+    );
+    cubeVertexIndexBuffer.itemSize = 1;
+    cubeVertexIndexBuffer.numItems = e.length;
 }
+
 drawScene = () => {
     if (isWin) {
         drawHUDEnd();
@@ -1027,78 +1035,7 @@ getP = (e, t, a) => {
         (e /= 2),
         (t /= 2),
         [
-            -e,
-            -t,
-            2 * a,
-            e,
-            -t,
-            2 * a,
-            e,
-            t,
-            2 * a,
-            -e,
-            t,
-            2 * a,
-            -e,
-            -t,
-            0,
-            -e,
-            t,
-            0,
-            e,
-            t,
-            0,
-            e,
-            -t,
-            0,
-            -e,
-            t,
-            0,
-            -e,
-            t,
-            2 * a,
-            e,
-            t,
-            2 * a,
-            e,
-            t,
-            0,
-            -e,
-            -t,
-            0,
-            e,
-            -t,
-            0,
-            e,
-            -t,
-            2 * a,
-            -e,
-            -t,
-            2 * a,
-            e,
-            -t,
-            0,
-            e,
-            t,
-            0,
-            e,
-            t,
-            2 * a,
-            e,
-            -t,
-            2 * a,
-            -e,
-            -t,
-            0,
-            -e,
-            -t,
-            2 * a,
-            -e,
-            t,
-            2 * a,
-            -e,
-            t,
-            0,
+            -e, -t, 2 * a, e, -t, 2 * a, e, t, 2 * a, -e, t, 2 * a, -e, -t, 0, -e, t, 0, e, t, 0, e, -t, 0, -e, t, 0, -e, t, 2 * a, e, t, 2 * a, e, t, 0, -e, -t, 0, e, -t, 0, e, -t, 2 * a, -e, -t, 2 * a, e, -t, 0, e, t, 0, e, t, 2 * a, e, -t, 2 * a, -e, -t, 0, -e, -t, 2 * a, -e, t, 2 * a, -e, t, 0,
         ]
     );
 }
@@ -1109,54 +1046,7 @@ getUVW = (e, t) => {
     if (UVW[e] && UVW[e][t]) return UVW[e][t];
     UVW[e] || (UVW[e] = []);
     var a = [
-        0,
-        0,
-        1,
-        0,
-        1,
-        1,
-        0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        1,
-        0,
-        1,
-        1,
-        0,
-        t,
-        0,
-        0,
-        1,
-        0,
-        1,
-        t,
-        0,
-        0,
-        1,
-        0,
-        1,
-        t,
-        0,
-        t,
-        0,
-        0,
-        1,
-        0,
-        1,
-        t,
-        0,
-        t,
-        1,
-        0,
-        1,
-        t,
-        0,
-        t,
-        0,
-        0,
+        0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, t, 0, 0, 1, 0, 1, t, 0, 0, 1, 0, 1, t, 0, t, 0, 0, 1, 0, 1, t, 0, t, 1, 0, 1, t, 0, t, 0, 0,
     ];
     return (UVW[e][t] = a), a;
 }
@@ -1267,89 +1157,105 @@ drawCube = (e) => {
                 mat4.rotate(mvMatrix, g.rotation.y, [0, 0, 1]);
         }
     if (
-        (s &&
-            (mat4.rotate(mvMatrix, s.x, [1, 0, 0]),
-                mat4.rotate(mvMatrix, s.y, [0, 1, 0]),
-                mat4.rotate(mvMatrix, s.z, [0, 0, 1])),
-            (f = "ball" == i ? shaderProgramLava : shaderProgram),
-            e.geometry)
+        s &&
+        (mat4.rotate(mvMatrix, s.x, [1, 0, 0]),
+            mat4.rotate(mvMatrix, s.y, [0, 1, 0]),
+            mat4.rotate(mvMatrix, s.z, [0, 0, 1])),
+        (f = "ball" == i ? shaderProgramLava : shaderProgram),
+        e.geometry
     )
         var f = shaderProgramLava;
     gl.useProgram(f), gl.uniform3f(f.cp, t, a, r);
     var u = getUVWBuffer(i, o);
-    gl.bindBuffer(gl.ARRAY_BUFFER, u),
-        gl.vertexAttribPointer(
-            f.textureCoordAttribute,
-            u.itemSize,
-            gl.FLOAT,
-            !1,
-            0,
-            0
-        ),
-        (u = getCoord(i, o, v)),
-        gl.bindBuffer(gl.ARRAY_BUFFER, u),
-        gl.vertexAttribPointer(
-            f.vertexPositionAttribute,
-            u.itemSize,
-            gl.FLOAT,
-            !1,
-            0,
-            0
-        ),
-        lightsDisplayed.length && gl.uniform4fv(f.lights, lightsDisplayed),
-        gl.uniform1i(f.nbLights, lightsDisplayed.length / 4),
-        gl.uniform3f(f.ac, 0.1, 0.1, 0.1),
-        gl.uniform2f(f.res, 1920, 1e3),
-        gl.uniform1i(f.samplerUniform, 0),
-        gl.uniform1f(f.it, frame),
-        gl.uniformMatrix4fv(f.pMatrixUniform, !1, pMatrix),
-        gl.uniformMatrix4fv(f.mvMatrixUniform, !1, mvMatrix),
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer),
-        gl.activeTexture(gl.TEXTURE0),
-        gl.uniform1i(f.isPlayer, 0),
-        gl.uniform1i(f.cubeFace, 1),
-        gl.uniform1i(f.isCurrentPlayer, 0),
-        "ball" == i
-            ? (gl.bindTexture(gl.TEXTURE_2D, sphereTexture),
-                gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0))
-            : "block" == i || "block2" == i
-                ? ("block2" == i
-                    ? gl.bindTexture(gl.TEXTURE_2D, tilesColors[22])
-                    : gl.bindTexture(gl.TEXTURE_2D, crate),
-                    gl.uniform1i(f.isCurrentPlayer, "block2" == i ? 1 : 0),
-                    gl.uniform1i(f.cubeFace, 1),
-                    gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0),
-                    gl.uniform1i(f.cubeFace, 5),
-                    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36),
-                    gl.uniform1i(f.cubeFace, 6),
-                    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48),
-                    gl.uniform1i(f.isCurrentPlayer, 0))
-                : "player" == i
-                    ? (gl.uniform1i(f.isPlayer, 1),
-                        gl.uniform1i(f.isCurrentPlayer, d ? 1 : 0),
-                        gl.uniform1i(f.cubeFace, 1),
-                        gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0),
-                        gl.uniform1i(f.cubeFace, 5),
-                        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36),
-                        gl.uniform1i(f.cubeFace, 6),
-                        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48))
-                    : ("trigger" == i
-                        ? gl.bindTexture(gl.TEXTURE_2D, n.color)
-                        : gl.bindTexture(
-                            gl.TEXTURE_2D,
-                            h
-                                ? tilesColors[21]
-                                : tilesColors[(t / 2 + (-a / 2) * 10) % 21]
-                        ),
-                        gl.uniform1i(f.cubeFace, 0),
-                        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0),
-                        "normal2" != i && gl.bindTexture(gl.TEXTURE_2D, mur),
-                        gl.drawElements(gl.TRIANGLES, 30, gl.UNSIGNED_SHORT, 12),
-                        gl.uniform1i(f.cubeFace, 5),
-                        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36),
-                        gl.uniform1i(f.cubeFace, 6),
-                        gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48));
+    gl.bindBuffer(gl.ARRAY_BUFFER, u);
+    gl.vertexAttribPointer(
+        f.textureCoordAttribute,
+        u.itemSize,
+        gl.FLOAT,
+        !1,
+        0,
+        0
+    );
+    u = getCoord(i, o, v);
+    gl.bindBuffer(gl.ARRAY_BUFFER, u);
+    gl.vertexAttribPointer(
+        f.vertexPositionAttribute,
+        u.itemSize,
+        gl.FLOAT,
+        !1,
+        0,
+        0
+    );
+    lightsDisplayed.length && gl.uniform4fv(f.lights, lightsDisplayed);
+    gl.uniform1i(f.nbLights, lightsDisplayed.length / 4);
+    gl.uniform3f(f.ac, 0.1, 0.1, 0.1);
+    gl.uniform2f(f.res, 1920, 1e3);
+    gl.uniform1i(f.samplerUniform, 0);
+    gl.uniform1f(f.it, frame);
+    gl.uniformMatrix4fv(f.pMatrixUniform, !1, pMatrix);
+    gl.uniformMatrix4fv(f.mvMatrixUniform, !1, mvMatrix);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.uniform1i(f.isPlayer, 0);
+    gl.uniform1i(f.cubeFace, 1);
+    gl.uniform1i(f.isCurrentPlayer, 0);
+
+    switch (i) {
+        case "ball":
+            gl.bindTexture(gl.TEXTURE_2D, sphereTexture);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+            break;
+        case "block":
+        case "block2":
+            if (i === "block2") {
+                gl.bindTexture(gl.TEXTURE_2D, tilesColors[22]);
+            } else {
+                gl.bindTexture(gl.TEXTURE_2D, crate);
+            }
+            gl.uniform1i(f.isCurrentPlayer, i === "block2" ? 1 : 0);
+            gl.uniform1i(f.cubeFace, 1);
+            gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
+            gl.uniform1i(f.cubeFace, 5);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36);
+            gl.uniform1i(f.cubeFace, 6);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48);
+            gl.uniform1i(f.isCurrentPlayer, 0);
+            break;
+        case "player":
+            gl.uniform1i(f.isPlayer, 1);
+            gl.uniform1i(f.isCurrentPlayer, d ? 1 : 0);
+            gl.uniform1i(f.cubeFace, 1);
+            gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
+            gl.uniform1i(f.cubeFace, 5);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36);
+            gl.uniform1i(f.cubeFace, 6);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48);
+            break;
+        case "trigger":
+            gl.bindTexture(gl.TEXTURE_2D, n.color);
+            gl.uniform1i(f.cubeFace, 0);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+            break;
+        default:
+            gl.bindTexture(
+                gl.TEXTURE_2D,
+                h ? tilesColors[21] : tilesColors[(t / 2 + (-a / 2) * 10) % 21]
+            );
+            gl.uniform1i(f.cubeFace, 0);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+            if (i !== "normal2") {
+                gl.bindTexture(gl.TEXTURE_2D, mur);
+            }
+            gl.drawElements(gl.TRIANGLES, 30, gl.UNSIGNED_SHORT, 12);
+            gl.uniform1i(f.cubeFace, 5);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 36);
+            gl.uniform1i(f.cubeFace, 6);
+            gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48);
+            break;
+    }
+
 }
+
 move = (e, t, a) => {
     if (
         0 == a.inMoveX &&
@@ -1418,30 +1324,7 @@ move = (e, t, a) => {
             (nbMoves += n),
             n &&
             playSound([
-                0,
-                ,
-                0.047,
-                0.5711,
-                0.1329,
-                0.8391,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                ,
-                1,
-                ,
-                ,
-                ,
-                ,
-                0.5,
+                0, , 0.047, 0.5711, 0.1329, 0.8391, , , , , , , , , , , , , 1, , , , , 0.5,
             ]),
             n
         );
@@ -1455,8 +1338,8 @@ actionTrigger = (e, t) => {
             case 2:
                 for (var a = 0; a < e.on.length; a++) {
                     var r = e.on[a];
-                    (level[r[0]][r[1]].nb += t ? 1 : -1),
-                        (t === !1 && level[r[0]][r[1]].nb > 0) ||
+                    level[r[0]][r[1]].nb += t ? 1 : -1;
+                    (t === !1 && level[r[0]][r[1]].nb > 0) ||
                         switchTileHeight(r[0], r[1], r[2], r[3], t);
                 }
                 break;
@@ -1467,9 +1350,11 @@ actionTrigger = (e, t) => {
                 }
         }
 }
+
 gameOver = () => {
     initGame();
 }
+
 nextLevel = () => {
     nbMovesAtStart = nbMoves;
     levelExplode = !1;
@@ -1477,6 +1362,7 @@ nextLevel = () => {
         ? (cancelAnimationFrame(loop), drawHUDEnd())
         : initGame();
 }
+
 explodeLevel = () => {
     (players = []),
         (vitesseRotation = 10),
@@ -1580,23 +1466,24 @@ addPlayerControl = () => {
         for (var e = 0; e < players.length; e++)
             players[e].haveControl = !0;
 }
-var tutoNumber = !1,
-    tutoText = !1;
+var tutoNumber = !1, tutoText = !1;
 startTuto = () => {
     tuto[gameLevel]
         ? ((tutoNumber = -1), nextTuto())
         : addPlayerControl();
 }
 nextTuto = () => {
-    if ((tutoNumber++, tuto[gameLevel][tutoNumber])) {
+    if (tutoNumber++, tuto[gameLevel][tutoNumber]) {
         var e = tuto[gameLevel][tutoNumber];
-        (zoomOn = e[0]), (tutoText = e[1]);
+        zoomOn = e[0];
+        tutoText = e[1];
         timeOutTuto = setTimeout(nextTuto, e[2]);
-    } else
-        (zoomOn = !1),
-            (tutoNumber = !1),
-            (tutoText = !1),
-            addPlayerControl();
+    } else {
+        zoomOn = !1;
+        tutoNumber = !1;
+        tutoText = !1;
+        addPlayerControl();
+    }
 }
 switchTileHeight = (e, t, a, r, o) => {
     null == r &&
